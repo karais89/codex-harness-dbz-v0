@@ -13,7 +13,7 @@ The prefix makes experiment type visible first and keeps multiple experiment rep
 ### Start with minimal Codex harness
 
 Decision:
-Use README.md, AGENTS.md, PLANS.md, docs/current-state.md, docs/decisions.md, and one ExecPlan.
+Use README.md, AGENTS.md, PLANS.md, docs/current-state.md, docs/decisions.md, and one active/canonical Bootstrap ExecPlan.
 
 Rationale:
 M0 should stay small. MCP, custom skills, hooks, and subagents are deferred until there is real workflow friction.
@@ -33,3 +33,11 @@ Use each ExecPlan `Decision Log` or `결정 기록` for choices made inside that
 
 Rationale:
 This keeps temporary execution context separate from long-term project rules.
+
+### Use 000-bootstrap as the canonical M0 verification plan
+
+Decision:
+Use `exec-plans/000-bootstrap.md` as the canonical M0 Bootstrap verification ExecPlan.
+
+Rationale:
+M0 must have one stable reference plan for checking Unity project creation, GitHub connection, and minimum Codex harness readiness before any M1 first playable loop work starts.

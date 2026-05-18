@@ -10,7 +10,7 @@ M0: Bootstrap Unity project and minimal Codex harness.
 
 ## Active Plan
 
-None.
+exec-plans/000-bootstrap.md
 
 ## Completed
 
@@ -24,10 +24,11 @@ None.
 - Git worktree smoke test completed.
 - Repository-root `.worktree/` is ignored and used for local worktree storage.
 - M0-7 state documents and update rules connected through `AGENTS.md` and `PLANS.md`.
+- M0 bootstrap verification ExecPlan created at `exec-plans/000-bootstrap.md`.
 
 ## Next Step
 
-Start a new ExecPlan before the next non-trivial workflow, Unity, or gameplay change.
+Review and execute `exec-plans/000-bootstrap.md` to verify whether M0 is ready for M1.
 
 ## Not Yet
 
