@@ -22,19 +22,23 @@ M1 is a separate future stage for the first playable loop. M1 may start only aft
 - [x] `git remote -v` was checked on 2026-05-18 and showed GitHub `origin` at `https://github.com/karais89/codex-harness-dbz-v0.git`.
 - [x] `git status --short` was checked before this plan was authored and showed a pre-existing modification to `docs/complete-log.md`.
 - [x] `exec-plans/000-bootstrap.md` has been created as the canonical M0 bootstrap verification ExecPlan.
-- [x] `docs/current-state.md` has been updated so `Active Plan` points to `exec-plans/000-bootstrap.md`.
-- [ ] Unity project opens normally in Unity Editor without project-load or compile errors.
-- [ ] `git status` is clean, or any remaining changes are explicitly recorded before M1 starts.
-- [ ] A final M0 readiness review confirms every M1 start condition in this plan.
-- [ ] Outcomes and retrospective are updated after M0 validation is executed.
+- [x] M0 검증이 활성 상태일 때 `docs/current-state.md`의 `Active Plan`이 `exec-plans/000-bootstrap.md`를 가리키도록 갱신했다.
+- [x] M0 완료 후 `docs/current-state.md`는 활성 계획이 없음을 기록하고 다음 단계를 `exec-plans/004-first-playable-loop.md`로 안내한다.
+- [x] Unity project opens normally in Unity Editor without project-load or compile errors.
+- [x] `git status` is clean, or any remaining changes are explicitly recorded before M1 starts.
+- [x] A final M0 readiness review confirms every M1 start condition in this plan.
+- [x] Outcomes and retrospective are updated after M0 validation is executed.
 
-This progress section intentionally does not declare M0 complete.
+M0는 완료되었고 저장소는 M1을 시작할 준비가 되었다.
 
 ## Surprises & Discoveries
 
 - PowerShell commands initially failed inside the default Windows sandbox with `CreateProcessAsUserW failed: 5`; read and inspection commands were run with approved escalated execution.
 - `docs/complete-log.md` was already modified before this ExecPlan was authored. This plan does not edit that file, revert it, or treat it as part of the bootstrap plan unless a later validation step records it as a remaining change.
 - Older ExecPlans exist in `exec-plans/`. They are historical workflow plans and must not be deleted, renamed, or moved as part of this M0 bootstrap verification.
+- Unity 6000.4.1f1이 설치되어 있으며 `ProjectSettings/ProjectVersion.txt`와 일치한다.
+- Unity batchmode 직접 검증은 같은 프로젝트를 연 Unity 인스턴스가 이미 있어서 중단되었다. 활성 Editor 로그에서 `Loaded scene 'Assets/Scenes/SampleScene.unity'`와 `[Project] Loading completed`를 확인했으므로 프로젝트 열림 검증은 통과로 판단했다.
+- 검증 기록 중 `git status --short`에는 M1-0 관련 문서 변경만 남아 있었다. 이 변경은 최종 M1-0 커밋에 포함해 M1 시작 전 worktree가 clean이 되도록 한다.
 
 ## Decision Log
 
@@ -54,19 +58,23 @@ This progress section intentionally does not declare M0 complete.
 - Rationale: A new Codex session or person developer should be able to find the active plan from the state document without relying on prior chat context.
 - Date: 2026-05-18
 
+- Decision: M0 검증이 완료되면 `docs/current-state.md`는 활성 계획을 비우고 M1을 `exec-plans/004-first-playable-loop.md`로 안내한다.
+- Rationale: `exec-plans/000-bootstrap.md`는 완료되었고, 기존 `001`-`003` 계획은 이전 workflow 계획으로 이미 사용 중이다.
+- Date: 2026-05-18
+
 Durable decisions that should continue beyond this plan must also be recorded in `docs/decisions.md`. This plan's `Decision Log` records plan-local choices and rationale; `docs/decisions.md` records project rules that should survive after this plan closes.
 
 ## Outcomes & Retrospective
 
-Current outcome: this plan establishes the M0 bootstrap verification target and required checks. It does not yet prove M0 complete because Unity Editor validation and final M1 readiness review are still pending.
+Current outcome: M0 bootstrap verification is complete. Unity 프로젝트가 열리고, GitHub remote가 연결되어 있으며, 최소 Codex 하네스 문서가 존재한다. M1은 새 First Playable Loop ExecPlan에서 시작할 수 있다.
 
-Retrospective to complete after validation:
+Retrospective:
 
-- Completed:
-- Not completed:
-- Learned:
-- Next step:
-- Ready to start M1:
+- Completed: Unity 프로젝트 열림 근거, GitHub remote 확인, 필수 문서 확인, 표준 bootstrap 계획 확인, M0/M1 범위 분리 확인, 최종 M1 시작 조건 검토.
+- Not completed: 게임플레이 구현은 의도적으로 수행하지 않았다.
+- Learned: 프로젝트가 이미 Unity에서 열려 있어 두 번째 batchmode 실행은 중단되었다. 그래도 Editor 로그에서 프로젝트와 sample scene 로드 근거를 확인할 수 있었다.
+- Next step: `exec-plans/004-first-playable-loop.md`로 M1을 시작한다.
+- Ready to start M1: Yes.
 
 ## Context and Orientation
 

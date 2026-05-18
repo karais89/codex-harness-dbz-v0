@@ -49,3 +49,11 @@ M1 첫 플레이 가능 루프 작업을 시작하기 전에 Unity 프로젝트 
 
 근거:
 프로젝트 문서 언어를 한글로 통일하면 상태, 결정, 계획을 더 일관되게 읽고 유지할 수 있다.
+
+### M1 First Playable Loop ExecPlan은 004 번호를 사용한다
+
+결정:
+M1 First Playable Loop ExecPlan은 `exec-plans/004-first-playable-loop.md`에 생성한다.
+
+근거:
+`exec-plans/000-bootstrap.md`가 표준 M0 검증 계획이고, `001`-`003`은 이미 기존 workflow ExecPlan으로 사용 중이다. M1 계획은 기존 파일을 덮어쓰거나 번호 충돌을 만들지 않아야 한다.

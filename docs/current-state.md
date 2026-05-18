@@ -6,11 +6,11 @@ Codex Harness v0 — Delivery Bot Zero
 
 ## 현재 단계
 
-M0: Unity 프로젝트 생성과 최소 Codex 하네스 구성.
+M0 완료. M1 First Playable Loop 시작 준비 완료.
 
 ## 활성 계획
 
-exec-plans/000-bootstrap.md
+없음. M1을 시작하면 `exec-plans/004-first-playable-loop.md`를 생성한다.
 
 ## 완료됨
 
@@ -26,10 +26,13 @@ exec-plans/000-bootstrap.md
 - M0-7 상태 문서와 업데이트 규칙을 `AGENTS.md` 및 `PLANS.md`에 연결했다.
 - M0 부트스트랩 검증 ExecPlan을 `exec-plans/000-bootstrap.md`에 생성했다.
 - 모든 저장소 문서는 한글로 작성한다는 지침을 `AGENTS.md`와 `docs/decisions.md`에 기록했다.
+- M1-0에서 M0 완료 상태를 확인했다.
+- Unity 6000.4.1f1 Editor 로그에서 `Assets/Scenes/SampleScene.unity` 로드와 프로젝트 로딩 완료를 확인했다.
+- GitHub `origin` remote와 M0 필수 문서 존재를 확인했다.
 
 ## 다음 단계
 
-`exec-plans/000-bootstrap.md`를 검토하고 실행해 M0가 M1로 진행할 준비가 되었는지 검증한다.
+M1-1에서 First Playable Loop 자동 실행 프롬프트를 사용해 `exec-plans/004-first-playable-loop.md`를 생성하고 실행한다.
 
 ## 아직 하지 않음
 

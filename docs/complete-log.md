@@ -66,3 +66,25 @@
 [x] git / Unity / 문서 존재 여부를 검증하는 방법이 구체적이다.
 
 ## M0-9. M0 전체가 M1을 시작할 수 있는 상태인지 검증만 하는 단계
+
+[x] Unity Editor 로그에서 프로젝트 로딩 완료를 확인했다.
+[x] GitHub origin remote를 확인했다.
+[x] M0 필수 문서와 canonical bootstrap ExecPlan 존재를 확인했다.
+[x] M0와 M1 범위가 분리되어 있고, 아직 게임플레이 구현이 없음을 확인했다.
+
+## M1-0. M0 완료 상태 확인
+
+[x] Unity 프로젝트가 열린다.
+[x] README.md가 있다.
+[x] AGENTS.md가 있다.
+[x] PLANS.md가 있다.
+[x] docs/current-state.md가 있다.
+[x] docs/decisions.md가 있다.
+[x] exec-plans/000-bootstrap.md가 있다.
+[x] git status가 clean이다.
+
+검증 메모:
+
+- Unity 6000.4.1f1 Editor 로그에서 `Loaded scene 'Assets/Scenes/SampleScene.unity'`와 `[Project] Loading completed`를 확인했다.
+- batchmode 검증은 같은 프로젝트를 연 Unity 인스턴스가 이미 실행 중이라 중단되었다.
+- M1 ExecPlan은 기존 `000`-`003` 번호를 피해서 `exec-plans/004-first-playable-loop.md`를 사용한다.
