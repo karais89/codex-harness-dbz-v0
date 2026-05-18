@@ -54,6 +54,35 @@ ExecPlan은 저장소 루트의 `exec-plans/` 아래에 저장합니다.
 - 아주 작은 README 변경
 - 동작이나 워크플로우에 영향을 주지 않는 주석
 
+## Design Dependency Check
+
+Player-facing gameplay ExecPlan을 작성하거나 갱신하기 전에 Codex는 승인된 Design 기준을 확인합니다.
+
+확인 대상은 다음과 같습니다.
+
+1. `docs/design/README.md`가 존재한다.
+2. `docs/design/core-beliefs.md`가 존재하고 `상태: 승인됨`이다.
+3. 해당 작업의 플레이어 경험 또는 게임 규칙을 정의하는 승인된 `docs/design/*.md` 문서가 최소 1개 있다.
+
+`docs/design/README.md`는 design 문서 작성 규약이므로 존재 확인 대상입니다. 승인 상태 확인 대상은 실제 design 산출물인 `docs/design/*.md` 파일입니다.
+
+`core-beliefs.md`만으로는 gameplay ExecPlan을 시작할 수 없습니다. `core-beliefs.md`는 프로젝트 방향 기준이고, gameplay ExecPlan은 해당 작업의 플레이어 경험 또는 게임 규칙을 정의하는 별도 승인 design 문서를 함께 참조해야 합니다.
+
+관련 승인 design 문서가 없으면 Codex는 ExecPlan 작성을 멈추고 design 확인을 요청합니다. 이때 기존 문서로 충분하지 않은 이유, 막혀 있는 player-facing 결정, 필요한 조치 수준, 생성 또는 수정할 파일, 사용자에게 먼저 물어야 할 질문을 보고합니다.
+
+Gameplay ExecPlan은 새로운 player-facing 규칙을 발명하지 않습니다. 승인된 design 문서를 구현 방법과 검증 절차로 옮기는 역할만 합니다.
+
+하네스, 문서 구조, workflow 규칙 도입 작업에는 이 체크를 적용하지 않습니다. 단, 그런 작업 중 player-facing gameplay 규칙을 정의하기 시작하면 Design Dependency Check로 전환합니다.
+
+Gameplay ExecPlan에는 다음 섹션을 포함합니다.
+
+```md
+## 승인된 Design 기준
+
+- `docs/design/core-beliefs.md` 상태: 승인됨
+- `docs/design/<relevant-design-doc>.md` 상태: 승인됨
+```
+
 ## ExecPlan 전 인터뷰와 생성 게이트
 
 사소하지 않은 작업은 ExecPlan 작성 전에 사용자 의도와 작업 범위를 확인합니다.

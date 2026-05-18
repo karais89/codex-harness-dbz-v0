@@ -26,6 +26,22 @@
 - 작업으로 프로젝트 상태가 바뀌면 프로젝트 문서를 업데이트합니다.
 - 저장소 파일에 개인의 경력, 가족, 재정, 고용주 관련 민감 정보를 포함하지 않습니다.
 
+## Design Baseline Check
+
+Player-facing gameplay 설계, gameplay ExecPlan 작성, gameplay 구현을 시작하기 전에 Codex는 다음을 확인합니다.
+
+1. `docs/design/README.md`가 존재한다.
+2. `docs/design/core-beliefs.md`가 존재한다.
+3. `docs/design/core-beliefs.md`의 상태가 `상태: 승인됨`이다.
+
+`docs/design/README.md`는 design 문서 작성 규약이므로 승인 상태 확인 대상이 아니라 존재 확인 대상입니다.
+
+`docs/design/core-beliefs.md`가 없거나 `상태: 승인됨`이 아니면 Codex는 gameplay ExecPlan 작성이나 gameplay 구현을 멈추고, 사용자에게 design baseline 생성 또는 승인이 먼저 필요하다고 알립니다.
+
+하네스, 문서 구조, workflow 규칙 도입 작업에는 이 체크를 적용하지 않습니다. 단, 하네스 또는 문서 작업 중 player-facing gameplay 규칙을 정의하기 시작하면 Design Gate로 전환합니다.
+
+Codex는 사용자 명시 승인 없이 `docs/design/core-beliefs.md` 또는 다른 design 문서의 상태를 `상태: 승인됨`으로 변경하지 않습니다.
+
 ## 요청 분류
 
 Codex는 사용자 요청을 먼저 분류합니다.

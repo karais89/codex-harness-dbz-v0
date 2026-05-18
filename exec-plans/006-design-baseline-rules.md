@@ -12,7 +12,7 @@
 
 ## 2. 진행 상황
 
-- 상태: 저장소 문서 반영 승인 대기
+- 상태: 완료
 - [x] 사용자와 design baseline 필요성을 논의했다.
 - [x] `docs/design`은 마일스톤 문서 폴더가 아니라 승인된 플레이어 경험과 게임 규칙 기준 문서 폴더로 정의하기로 했다.
 - [x] `gameplay-loop.md`는 모든 게임의 필수 문서가 아니라 조건부 design 문서 예시로 두기로 했다.
@@ -21,11 +21,10 @@
 - [x] `docs/design/README.md`는 승인 상태 확인 대상이 아니라 존재 확인 대상으로 두기로 했다.
 - [x] `core-beliefs.md`가 초안이면 M1을 아직 시작할 수 없다는 조건을 계획에 포함했다.
 - [x] `docs/design/README.md`는 design 문서 작성 규약이고 `docs/design/core-beliefs.md`는 그 규약에 따라 생성되는 실제 design 산출물임을 계획에 포함했다.
-- [ ] 사용자에게 이 ExecPlan 검토용 요약을 제공한다.
-- [ ] 사용자에게 저장소 문서 반영 승인 여부를 확인한다.
-- [ ] 승인 후 design baseline 규칙을 저장소 문서에 반영한다.
-- [ ] 검증 절차를 수행하고 결과를 기록한다.
-- [ ] 회고를 작성한다.
+- [x] 사용자 요청으로 `exec-plans/006-design-baseline-rules.md` 기준 저장소 문서 반영을 진행했다.
+- [x] Design baseline 규칙을 저장소 문서에 반영했다.
+- [x] 검증 절차를 수행하고 결과를 기록했다.
+- [x] 회고를 작성했다.
 
 ## 3. 맥락
 
@@ -150,7 +149,7 @@
 
 6. `docs/current-state.md`를 갱신한다.
    - M1 시작 전 design baseline 규칙 도입이 선행 준비 단계임을 기록한다.
-   - 활성 계획을 `exec-plans/006-design-baseline-rules.md`로 표시한다.
+   - 작업 중에는 활성 계획을 `exec-plans/006-design-baseline-rules.md`로 표시하고, 완료 후에는 활성 계획 없음과 006 완료 상태를 기록한다.
    - M1 First Playable Loop는 아직 시작하지 않았고 `exec-plans/004-first-playable-loop.md`는 계속 예약 상태이며, 이번 작업에서는 생성하거나 수정하지 않는다고 기록한다.
    - 이 계획이 끝난 직후에도 `docs/design/core-beliefs.md`가 `상태: 초안`이면 M1은 아직 시작할 수 없고, M1 시작 전 사용자 검토와 명시 승인이 필요하다고 기록한다.
    - 다음 단계는 `core-beliefs.md` 사용자 승인 이후 M1에 필요한 조건부 design 문서가 필요한지 판단하는 것이라고 기록한다.
@@ -198,6 +197,21 @@
    - `git status --short` 결과를 확인한다.
    - 커밋 후 `git status`가 clean인 상태를 목표로 한다.
 
+### 검증 결과
+
+2026-05-19에 다음을 확인했다.
+
+- `Test-Path docs/design/README.md`: `True`.
+- `Test-Path docs/design/core-beliefs.md`: `True`.
+- `Test-Path exec-plans/004-first-playable-loop.md`: `False`.
+- `Test-Path docs/design/gameplay-loop.md`: `False`.
+- `git diff --name-only`: `AGENTS.md`, `PLANS.md`, `docs/current-state.md`, `docs/decisions.md`, `exec-plans/006-design-baseline-rules.md`.
+- `git status --short`: `AGENTS.md`, `PLANS.md`, `docs/current-state.md`, `docs/decisions.md`, `exec-plans/006-design-baseline-rules.md` 수정과 `docs/design/` 새 폴더만 표시되었다.
+- 자체 리뷰 결과 `AGENTS.md`, `PLANS.md`, `docs/current-state.md`, `docs/decisions.md`, `docs/design/README.md`, `docs/design/core-beliefs.md` 사이의 충돌은 발견하지 못했다.
+- `docs/design/README.md`는 design 문서 작성 규약이고, `docs/design/core-beliefs.md`는 실제 design 산출물이라는 구분을 확인했다.
+- `docs/design/core-beliefs.md`는 `상태: 초안`이며 사용자 승인 없이 `상태: 승인됨`으로 변경하지 않았다.
+- Unity 씬, C# 스크립트, gameplay 구현 파일을 변경하지 않았다.
+
 ## 6. 결정 기록
 
 - 결정: `docs/design`은 마일스톤 문서 폴더가 아니라 승인된 플레이어 경험과 게임 규칙 기준 문서 폴더로 정의한다.
@@ -232,16 +246,19 @@
   근거: `PLANS.md`가 ExecPlan 작성 규약이고 `exec-plans/*.md`가 실제 실행 계획인 것처럼, design도 규약과 산출물을 분리해야 하네스를 재사용 가능한 방식으로 유지할 수 있다.
   날짜: 2026-05-19
 
+- 결정: 2026-05-19 사용자 요청을 이 ExecPlan의 저장소 문서 반영 승인으로 보았다.
+  근거: 사용자가 `exec-plans/006-design-baseline-rules.md`를 기준으로 Design Baseline 규칙 도입 작업을 진행하라고 명시했다.
+  날짜: 2026-05-19
+
 ## 7. 예상 밖 발견
 
-- 아직 없음.
+- `exec-plans/004-first-playable-loop.md`와 `docs/design/gameplay-loop.md`는 작업 전후 모두 존재하지 않았다.
+- 로컬 명령은 Windows 샌드박스 프로세스 생성 오류가 발생해 승인된 격상 실행으로 수행했다.
 
 ## 8. 회고
 
-아직 작성하지 않는다. 이 계획이 구현, 검증, 문서 갱신까지 완료된 뒤 다음을 기록한다.
-
-- 완료한 것
-- 완료하지 못한 것
-- 배운 것
-- 다음에 해야 할 것
-- M1을 시작할 준비가 되었는지 여부
+- 완료한 것: `docs/design/README.md` 작성 규약을 추가하고, `docs/design/core-beliefs.md` 초안 baseline 산출물을 추가했다. `AGENTS.md`, `PLANS.md`, `docs/current-state.md`, `docs/decisions.md`에 design baseline 규칙을 반영했다.
+- 완료하지 못한 것: `docs/design/core-beliefs.md` 사용자 승인은 이 계획 범위가 아니므로 수행하지 않았다. M1 조건부 design 문서와 `exec-plans/004-first-playable-loop.md`도 생성하지 않았다.
+- 배운 것: `docs/design/README.md`는 규약이고 `docs/design/*.md`는 실제 design 산출물이라는 구분을 문서 전반에 반복해 두어야 승인 상태 확인 대상을 혼동하지 않는다.
+- 다음에 해야 할 것: 사용자가 `docs/design/core-beliefs.md`를 검토하고 승인 여부를 결정한다. 승인 이후 M1에 필요한 조건부 design 문서가 필요한지 판단한다.
+- M1을 시작할 준비가 되었는지 여부: 아직 아니다. `docs/design/core-beliefs.md`가 `상태: 초안`이고, M1 gameplay 규칙을 정의하는 승인 design 문서도 아직 없다.
