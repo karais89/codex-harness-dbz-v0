@@ -88,3 +88,17 @@
 - Unity 6000.4.1f1 Editor 로그에서 `Loaded scene 'Assets/Scenes/SampleScene.unity'`와 `[Project] Loading completed`를 확인했다.
 - batchmode 검증은 같은 프로젝트를 연 Unity 인스턴스가 이미 실행 중이라 중단되었다.
 - M1 ExecPlan은 기존 `000`-`003` 번호를 피해서 `exec-plans/004-first-playable-loop.md`를 사용한다.
+
+## M1-0a. M1 시작 전 마일스톤 로드맵 문서 추가
+
+[x] `docs/milestone-roadmap.html`이 있다.
+[x] M0-M5 마일스톤 범위가 시각화되어 있다.
+[x] 최소 성공, 실질 성공, 완전 성공 기준이 문서에 있다.
+[x] 실패 신호가 문서에 있다.
+[x] 장기 마일스톤 범위 결정이 `docs/decisions.md`에 기록되어 있다.
+[x] 현재 프로젝트 상태가 `docs/current-state.md`에 갱신되어 있다.
+
+검증 메모:
+
+- 정적 HTML 문서로 작성했다.
+- 민감 정보는 문서에 포함하지 않았다.

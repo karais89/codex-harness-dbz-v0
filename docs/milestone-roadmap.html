@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Harness v0 마일스톤 로드맵</title>
+  <style>
+    :root {
+      --paper: #f8f5ec;
+      --ink: #1c1f1b;
+      --muted: #5d6259;
+      --line: #d8d0bd;
+      --panel: #fffdf5;
+      --green: #1f7a54;
+      --green-soft: #dceee3;
+      --blue: #2f6f9f;
+      --blue-soft: #dceaf3;
+      --amber: #b96f16;
+      --amber-soft: #f4e3c4;
+      --red: #b13a31;
+      --red-soft: #f0d3ce;
+      --black: #10120f;
+      --shadow: 0 18px 45px rgba(38, 32, 19, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(28, 31, 27, 0.035) 1px, transparent 1px),
+        linear-gradient(rgba(28, 31, 27, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+      color: var(--ink);
+      font-family: "Aptos", "Malgun Gothic", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: calc(100% - 32px);
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      min-height: 520px;
+      border: 1px solid var(--black);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero,
+    .hero-copy,
+    .route-board,
+    .section,
+    .metric,
+    .route-step,
+    .route-step div,
+    .ladder-item,
+    .milestone,
+    .milestone-title,
+    .milestone-body,
+    .note-panel,
+    .risk,
+    .risk span {
+      min-width: 0;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, transparent 0 52%, rgba(31, 122, 84, 0.12) 52% 53%, transparent 53%),
+        linear-gradient(45deg, transparent 0 72%, rgba(185, 111, 22, 0.14) 72% 73%, transparent 73%);
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(28px, 5vw, 60px);
+      border-right: 1px solid var(--black);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 28px;
+      padding: 2px 10px;
+      border: 1px solid var(--black);
+      background: var(--amber-soft);
+      color: var(--black);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-top: 26px;
+      font-family: Georgia, "Malgun Gothic", serif;
+      font-size: 6.4rem;
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    .title-en {
+      font-size: 0.88em;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 1.18rem;
+      word-break: keep-all;
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .metric {
+      min-height: 118px;
+      padding: 14px;
+      border: 1px solid var(--black);
+      background: #ffffff;
+    }
+
+    .metric b {
+      display: block;
+      font-family: Georgia, "Malgun Gothic", serif;
+      font-size: 2.6rem;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      word-break: keep-all;
+    }
+
+    .route-board {
+      position: relative;
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: clamp(24px, 4vw, 44px);
+      background:
+        linear-gradient(90deg, rgba(16, 18, 15, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(16, 18, 15, 0.08) 1px, transparent 1px),
+        #eef3e8;
+      background-size: 34px 34px;
+    }
+
+    .route-step {
+      display: grid;
+      grid-template-columns: 66px 1fr;
+      align-items: stretch;
+      min-height: 74px;
+      border: 1px solid var(--black);
+      background: var(--panel);
+    }
+
+    .route-step strong {
+      display: grid;
+      place-items: center;
+      border-right: 1px solid var(--black);
+      background: var(--green-soft);
+      font-family: Georgia, "Malgun Gothic", serif;
+      font-size: 1.55rem;
+    }
+
+    .route-step:nth-child(2) strong,
+    .route-step:nth-child(5) strong {
+      background: var(--blue-soft);
+    }
+
+    .route-step:nth-child(3) strong,
+    .route-step:nth-child(6) strong {
+      background: var(--amber-soft);
+    }
+
+    .route-step:nth-child(4) strong {
+      background: var(--red-soft);
+    }
+
+    .route-step div {
+      padding: 12px 14px;
+    }
+
+    .route-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: clamp(22px, 4vw, 36px);
+      border: 1px solid var(--black);
+      background: rgba(255, 253, 245, 0.96);
+      box-shadow: 0 10px 28px rgba(38, 32, 19, 0.08);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 14px;
+    }
+
+    h2 {
+      font-family: Georgia, "Malgun Gothic", serif;
+      font-size: 3.2rem;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-header p {
+      max-width: 460px;
+      color: var(--muted);
+      text-align: right;
+      word-break: keep-all;
+    }
+
+    .success-ladder {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .ladder-item {
+      min-height: 220px;
+      border: 1px solid var(--black);
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ladder-item header {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--black);
+      font-weight: 900;
+    }
+
+    .ladder-item:nth-child(1) header {
+      background: var(--amber-soft);
+    }
+
+    .ladder-item:nth-child(2) header {
+      background: var(--green-soft);
+    }
+
+    .ladder-item:nth-child(3) header {
+      background: var(--blue-soft);
+    }
+
+    .ladder-item div {
+      padding: 16px;
+    }
+
+    .ladder-item code {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 8px;
+      border: 1px solid var(--black);
+      background: var(--paper);
+      color: var(--black);
+      font-family: "Cascadia Mono", "Consolas", monospace;
+      font-size: 0.92rem;
+      white-space: normal;
+    }
+
+    .ladder-item p {
+      color: var(--muted);
+      word-break: keep-all;
+    }
+
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .milestone {
+      border: 1px solid var(--black);
+      background: #ffffff;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .milestone-head {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      min-height: 80px;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .milestone-code {
+      display: grid;
+      place-items: center;
+      border-right: 1px solid var(--black);
+      font-family: Georgia, "Malgun Gothic", serif;
+      font-size: 2rem;
+      font-weight: 900;
+      background: var(--green-soft);
+    }
+
+    .milestone:nth-child(2n) .milestone-code {
+      background: var(--blue-soft);
+    }
+
+    .milestone:nth-child(3n) .milestone-code {
+      background: var(--amber-soft);
+    }
+
+    .milestone-title {
+      padding: 12px 14px;
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      line-height: 1.25;
+    }
+
+    .question {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      word-break: keep-all;
+    }
+
+    .milestone-body {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 7px;
+      color: var(--black);
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .plain-list {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .plain-list li {
+      position: relative;
+      padding-left: 20px;
+      word-break: keep-all;
+    }
+
+    .plain-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--black);
+      background: var(--green);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .proof {
+      border-left: 4px solid var(--green);
+      padding: 10px 12px;
+      background: var(--green-soft);
+      color: #143b2b;
+      font-weight: 800;
+      word-break: keep-all;
+    }
+
+    .flow-strip {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      border: 1px solid var(--black);
+      background: #ffffff;
+    }
+
+    .flow-strip span {
+      min-height: 86px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      border-right: 1px solid var(--black);
+      text-align: center;
+      font-weight: 900;
+      word-break: keep-all;
+    }
+
+    .flow-strip span:last-child {
+      border-right: 0;
+    }
+
+    .flow-strip span:nth-child(1),
+    .flow-strip span:nth-child(4) {
+      background: var(--green-soft);
+    }
+
+    .flow-strip span:nth-child(2),
+    .flow-strip span:nth-child(5) {
+      background: var(--blue-soft);
+    }
+
+    .flow-strip span:nth-child(3),
+    .flow-strip span:nth-child(6) {
+      background: var(--amber-soft);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 12px;
+    }
+
+    .note-panel {
+      border: 1px solid var(--black);
+      background: #ffffff;
+      padding: 18px;
+    }
+
+    .note-panel h3 {
+      margin-bottom: 12px;
+    }
+
+    .handoff {
+      margin: 0;
+      overflow: auto;
+      border: 1px solid var(--black);
+      background: #181914;
+      color: #f5f0df;
+      padding: 18px;
+      font-family: "Cascadia Mono", "Consolas", monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .risk {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      min-height: 76px;
+      border: 1px solid var(--black);
+      background: #ffffff;
+    }
+
+    .risk strong {
+      display: grid;
+      place-items: center;
+      border-right: 1px solid var(--black);
+      background: var(--red-soft);
+      color: var(--red);
+      font-family: Georgia, "Malgun Gothic", serif;
+      font-size: 1.25rem;
+    }
+
+    .risk span {
+      align-self: center;
+      padding: 12px;
+      color: var(--muted);
+      word-break: keep-all;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      border: 1px solid var(--black);
+      background: var(--black);
+      color: var(--paper);
+      padding: 18px;
+      font-weight: 900;
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        border-right: 0;
+        border-bottom: 1px solid var(--black);
+      }
+
+      .hero-bottom,
+      .success-ladder,
+      .milestone-grid,
+      .risk-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-strip span {
+        border-bottom: 1px solid var(--black);
+      }
+
+      .flow-strip span:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .flow-strip span:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .section-header {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .section-header p {
+        text-align: left;
+      }
+
+      h1 {
+        font-size: 4.5rem;
+      }
+
+      h2 {
+        font-size: 2.6rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: calc(100% - 18px);
+        padding-top: 10px;
+      }
+
+      .hero-copy,
+      .route-board,
+      .section {
+        padding: 18px;
+      }
+
+      .route-step {
+        grid-template-columns: 56px 1fr;
+      }
+
+      .flow-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-strip span,
+      .flow-strip span:nth-child(2n) {
+        border-right: 0;
+        border-bottom: 1px solid var(--black);
+      }
+
+      .flow-strip span:last-child {
+        border-bottom: 0;
+      }
+
+      h1 {
+        font-size: 3.1rem;
+      }
+
+      .title-en {
+        font-size: 0.66em;
+      }
+
+      .lead,
+      .metric span,
+      .route-step span,
+      .section-header p,
+      .ladder-item p,
+      .plain-list li,
+      .proof,
+      .risk span,
+      .footer-note {
+        word-break: normal;
+        overflow-wrap: anywhere;
+      }
+
+      h2 {
+        font-size: 2.15rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <div>
+          <span class="eyebrow">Codex Harness v0</span>
+          <h1 id="page-title">
+            <span class="title-en">Delivery Bot Zero</span>
+            <span>마일스톤</span>
+            <span>로드맵</span>
+          </h1>
+          <p class="lead">
+            이 시험의 목적은 큰 게임을 만드는 것이 아니라, Codex 기반 Unity 개발 방식이 문서화,
+            계획, 구현, 검증, 인수인계까지 실제로 반복 가능한지 확인하는 것이다.
+          </p>
+        </div>
+        <div class="hero-bottom" aria-label="핵심 판정">
+          <div class="metric">
+            <b>6</b>
+            <span>M0부터 M5까지로 범위를 고정한다.</span>
+          </div>
+          <div class="metric">
+            <b>M3</b>
+            <span>실질 성공 판정 지점이다.</span>
+          </div>
+          <div class="metric">
+            <b>M5</b>
+            <span>공개 가능한 패키징까지 끝낸 완전 성공 지점이다.</span>
+          </div>
+        </div>
+      </div>
+      <div class="route-board" aria-label="전체 마일스톤">
+        <div class="route-step">
+          <strong>M0</strong>
+          <div>Bootstrap<span>Codex 작업장이 준비됐는가?</span></div>
+        </div>
+        <div class="route-step">
+          <strong>M1</strong>
+          <div>First Playable Loop<span>작은 게임 루프를 만들 수 있는가?</span></div>
+        </div>
+        <div class="route-step">
+          <strong>M2</strong>
+          <div>Change Request<span>기존 기능을 안 깨고 수정 가능한가?</span></div>
+        </div>
+        <div class="route-step">
+          <strong>M3</strong>
+          <div>Verification Loop<span>반복 검증이 가능한가?</span></div>
+        </div>
+        <div class="route-step">
+          <strong>M4</strong>
+          <div>Handoff Test<span>새 세션이 이어받을 수 있는가?</span></div>
+        </div>
+        <div class="route-step">
+          <strong>M5</strong>
+          <div>Portfolio Package<span>공개 증거물로 정리 가능한가?</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="success-title">
+      <div class="section-header">
+        <h2 id="success-title">성공 판정</h2>
+        <p>이번 시험은 끝없이 확장하지 않는다. M0~M5 안에서 성공, 보류, 실패를 판단한다.</p>
+      </div>
+      <div class="success-ladder">
+        <article class="ladder-item">
+          <header>최소 성공</header>
+          <div>
+            <code>M0 + M1</code>
+            <p>Codex로 Unity 작은 게임 루프 하나를 만들 수 있음을 확인한다.</p>
+          </div>
+        </article>
+        <article class="ladder-item">
+          <header>실질 성공</header>
+          <div>
+            <code>M0 + M1 + M2 + M3</code>
+            <p>Codex가 만들고, 수정하고, 반복 검증 가능한 상태까지 갈 수 있음을 확인한다.</p>
+          </div>
+        </article>
+        <article class="ladder-item">
+          <header>완전 성공</header>
+          <div>
+            <code>M0 + M1 + M2 + M3 + M4 + M5</code>
+            <p>repo 기반 기억과 공개 가능한 산출물까지 포함한 개발 워크플로우를 증명한다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="loop-title">
+      <div class="section-header">
+        <h2 id="loop-title">M1 핵심 루프</h2>
+        <p>첫 구현 목표는 기능을 키우는 것이 아니라, 가장 작은 시작-결과-재시작 흐름을 완성하는 것이다.</p>
+      </div>
+      <div class="flow-strip" aria-label="첫 플레이어블 루프">
+        <span>Start</span>
+        <span>Move</span>
+        <span>Pickup</span>
+        <span>Deliver</span>
+        <span>Result</span>
+        <span>Retry</span>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="milestone-title">
+      <div class="section-header">
+        <h2 id="milestone-title">마일스톤별 기준</h2>
+        <p>각 단계는 하나의 핵심 질문에 답해야 하며, 다음 단계로 넘어가기 전에 검증 기록을 남긴다.</p>
+      </div>
+      <div class="milestone-grid">
+        <article class="milestone">
+          <div class="milestone-head">
+            <div class="milestone-code">M0</div>
+            <div class="milestone-title">
+              <h3>프로젝트 부트스트랩</h3>
+              <span class="question">Codex가 일할 최소 작업장이 준비됐는가?</span>
+            </div>
+          </div>
+          <div class="milestone-body">
+            <div>
+              <span class="label">목표</span>
+              <ul class="plain-list">
+                <li>Unity 프로젝트, GitHub repo, README, AGENTS, PLANS, docs, exec-plans 구조를 준비한다.</li>
+                <li>Codex가 repo 목적과 다음 작업을 설명할 수 있게 한다.</li>
+              </ul>
+            </div>
+            <p class="proof">증명: Codex가 일할 수 있는 최소 작업장이 준비됐다.</p>
+          </div>
+        </article>
+
+        <article class="milestone">
+          <div class="milestone-head">
+            <div class="milestone-code">M1</div>
+            <div class="milestone-title">
+              <h3>첫 플레이어블 루프</h3>
+              <span class="question">작은 게임 루프를 실제로 만들 수 있는가?</span>
+            </div>
+          </div>
+          <div class="milestone-body">
+            <div>
+              <span class="label">범위</span>
+              <ul class="plain-list">
+                <li>로봇 시작 위치, 한 칸 이동, Pickup, Delivery, Turn Limit, Clear/Failed, Retry를 구현한다.</li>
+                <li>Unity Play Mode에서 1분 안에 클리어, 실패, 재시작을 확인한다.</li>
+              </ul>
+            </div>
+            <p class="proof">증명: Codex가 Unity에서 작은 플레이 루프를 만들었다.</p>
+          </div>
+        </article>
+
+        <article class="milestone">
+          <div class="milestone-head">
+            <div class="milestone-code">M2</div>
+            <div class="milestone-title">
+              <h3>Codex 변경 작업 검증</h3>
+              <span class="question">기존 기능을 망가뜨리지 않고 수정 가능한가?</span>
+            </div>
+          </div>
+          <div class="milestone-body">
+            <div>
+              <span class="label">추천 변경</span>
+              <ul class="plain-list">
+                <li>장애물 Tile 추가를 우선 후보로 둔다.</li>
+                <li>기존 Pickup, Deliver, Retry 흐름이 깨지지 않아야 한다.</li>
+                <li>장애물에 막히는 동작을 Play Mode에서 확인한다.</li>
+              </ul>
+            </div>
+            <p class="proof">증명: 최초 생성 이후의 두 번째 수정도 안전하게 수행했다.</p>
+          </div>
+        </article>
+
+        <article class="milestone">
+          <div class="milestone-head">
+            <div class="milestone-code">M3</div>
+            <div class="milestone-title">
+              <h3>검증/테스트 루프 정착</h3>
+              <span class="question">감이 아니라 반복 기준으로 검증 가능한가?</span>
+            </div>
+          </div>
+          <div class="milestone-body">
+            <div>
+              <span class="label">검증 방식</span>
+              <ul class="plain-list">
+                <li>수동 Play Mode 체크리스트를 만든다.</li>
+                <li>가능하면 간단한 Edit Mode Test 1~3개를 추가한다.</li>
+                <li>최소 1회 이상 전체 체크리스트를 통과한다.</li>
+              </ul>
+            </div>
+            <p class="proof">증명: Codex 작업 후 무엇을 확인해야 하는지 고정됐다.</p>
+          </div>
+        </article>
+
+        <article class="milestone">
+          <div class="milestone-head">
+            <div class="milestone-code">M4</div>
+            <div class="milestone-title">
+              <h3>새 세션 핸드오프 검증</h3>
+              <span class="question">repo 문서만 보고 새 Codex 세션이 이어받을 수 있는가?</span>
+            </div>
+          </div>
+          <div class="milestone-body">
+            <div>
+              <span class="label">성공 기준</span>
+              <ul class="plain-list">
+                <li>프로젝트 목적, 완료 상태, 현재 마일스톤, 다음 작업을 정확히 요약한다.</li>
+                <li>다음 작업을 과하게 확장하지 않는다.</li>
+                <li>사용자가 긴 설명을 다시 하지 않아도 된다.</li>
+              </ul>
+            </div>
+            <p class="proof">증명: repo 기반 기억과 문서화가 실제로 작동한다.</p>
+          </div>
+        </article>
+
+        <article class="milestone">
+          <div class="milestone-head">
+            <div class="milestone-code">M5</div>
+            <div class="milestone-title">
+              <h3>공개 가능한 포트폴리오 패키징</h3>
+              <span class="question">실험 결과를 외부에 보여줄 증거물로 정리할 수 있는가?</span>
+            </div>
+          </div>
+          <div class="milestone-body">
+            <div>
+              <span class="label">산출물</span>
+              <ul class="plain-list">
+                <li>README에 게임 설명과 AI 개발 워크플로우를 정리한다.</li>
+                <li>30~60초 플레이 영상 또는 GIF, 주요 스크린샷, 회고 문서를 준비한다.</li>
+                <li>Codex 작업과 사람의 검증을 분리해 기록한다.</li>
+              </ul>
+            </div>
+            <p class="proof">증명: 개인 학습을 공개 가능한 실험 산출물로 전환했다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="handoff-title">
+      <div class="section-header">
+        <h2 id="handoff-title">M4 핸드오프 요청문</h2>
+        <p>새 Codex 세션은 구현하지 않고, 문서만 읽어 현재 상태를 요약해야 한다.</p>
+      </div>
+      <div class="two-column">
+        <div class="note-panel">
+          <h3>확인할 문서</h3>
+          <ul class="plain-list">
+            <li>README.md</li>
+            <li>AGENTS.md</li>
+            <li>PLANS.md</li>
+            <li>docs/current-state.md</li>
+            <li>docs/decisions.md</li>
+            <li>docs/complete-log.md 또는 검증 문서</li>
+            <li>활성 ExecPlan</li>
+          </ul>
+        </div>
+        <pre class="handoff">Read the project documents and the active ExecPlan.
+
+Do not implement anything yet.
+
+Summarize:
+1. What this project is
+2. What has been completed
+3. What the current milestone is
+4. What should be done next
+5. What risks or ambiguities remain</pre>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="failure-title">
+      <div class="section-header">
+        <h2 id="failure-title">실패 신호</h2>
+        <p>아래 항목 중 3개 이상이 반복되면 Codex 자체보다 하네스, 작업 단위, 검증 루프를 먼저 조정한다.</p>
+      </div>
+      <div class="risk-grid">
+        <div class="risk"><strong>1</strong><span>Codex가 코드는 만들었지만 Unity에서 실행되지 않는다.</span></div>
+        <div class="risk"><strong>2</strong><span>매번 사용자가 긴 설명을 다시 해야 한다.</span></div>
+        <div class="risk"><strong>3</strong><span>ExecPlan이 있어도 실제 작업이 엉뚱하게 진행된다.</span></div>
+        <div class="risk"><strong>4</strong><span>수정 작업을 시키면 기존 기능이 계속 깨진다.</span></div>
+        <div class="risk"><strong>5</strong><span>검증 기록이 남지 않는다.</span></div>
+        <div class="risk"><strong>6</strong><span>GitHub repo를 봐도 무엇을 검증한 프로젝트인지 알 수 없다.</span></div>
+        <div class="risk"><strong>7</strong><span>사용자가 결국 코드를 대부분 직접 고쳐야 한다.</span></div>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      다음 실행 순서: M1 논의, grill-me 인터뷰, 공유된 이해 검증, ExecPlan 생성 승인, ExecPlan 자체 리뷰, 구현 승인, 구현과 검증.
+    </p>
+  </main>
+</body>
+</html>

@@ -8,6 +8,8 @@ Codex Harness v0 — Delivery Bot Zero
 
 M0 완료. M1 First Playable Loop 시작 전 워크플로우 규칙 초안을 승인하고 실제 저장소 규칙에 반영했다.
 
+M1 시작 전에 전체 시험 범위를 쉽게 확인할 수 있도록 `docs/milestone-roadmap.html`을 추가했다. 이 문서는 M0-M5 마일스톤, 최소/실질/완전 성공 기준, 실패 신호를 시각화한 검토 보조 문서다.
+
 ## 활성 계획
 
 없음. 워크플로우 규칙 반영 계획 `exec-plans/005-workflow-rule-adoption.md`는 완료되었다.
@@ -33,6 +35,8 @@ M1을 시작하려면 새 규칙에 따라 논의, `grill-me` 방식 인터뷰, 
 - GitHub `origin` remote와 M0 필수 문서 존재를 확인했다.
 - `docs/workflow-plan.md` 초안을 `grill-me` 기반 인터뷰, 공유된 이해 검증, ExecPlan 생성 후 자체 리뷰, 구현 승인 게이트 흐름으로 수정했다.
 - `docs/workflow-plan.md` 초안을 승인하고 `AGENTS.md`, `PLANS.md`, `docs/decisions.md`, `docs/current-state.md`에 실제 워크플로우 규칙으로 반영했다.
+- M0-M5로 실험 마일스톤 범위를 고정하고 `docs/milestone-roadmap.html`에 시각화했다.
+- M3까지 완료하면 실질 성공, M5까지 완료하면 완전 성공으로 보는 판정 기준을 기록했다.
 
 ## 다음 단계
 
