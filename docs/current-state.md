@@ -1,36 +1,40 @@
 # Current State
 
-## Project phase
+## Project
 
-The repository is in M0: Unity project creation, GitHub upload, and minimal Codex harness setup.
+Codex Harness v0 — Delivery Bot Zero
 
-The project intentionally does not include gameplay implementation, Unity MCP, custom skills, hooks, subagents, or external packages at this stage.
+## Current Stage
 
-## Workflow conventions
+M0: Bootstrap Unity project and minimal Codex harness.
 
-- Non-trivial work uses an ExecPlan under `exec-plans/`.
-- ExecPlan files use the `NNN-short-kebab-title.md` naming convention.
-- Local Git worktrees for workflow tests are stored under the repository-root `.worktree/` directory.
-- `.worktree/` is ignored by Git and is treated as local working storage, not project content.
+## Active Plan
 
-## Git worktree + ExecPlan smoke test
+None.
 
-Active plan: `exec-plans/002-git-worktree-execplan-smoke-test.md`
+## Completed
 
-The smoke test checked that a workflow-only change can:
+- Unity project created.
+- Git repository initialized.
+- GitHub repository connected.
+- README.md added.
+- AGENTS.md added.
+- PLANS.md added.
+- ExecPlan storage location and naming convention documented.
+- Git worktree smoke test completed.
+- Repository-root `.worktree/` is ignored and used for local worktree storage.
+- M0-7 state documents and update rules connected through `AGENTS.md` and `PLANS.md`.
 
-- Create or update an ExecPlan before implementation.
-- Add the `.worktree/` ignore convention.
-- Create a test worktree at `.worktree/execplan-smoke`.
-- Use the `test/execplan-smoke` branch when no path or branch conflict exists.
-- Record validation with `git worktree list` and `git status --short` in both the root worktree and the test worktree.
+## Next Step
 
-Result on 2026-05-18:
+Start a new ExecPlan before the next non-trivial workflow, Unity, or gameplay change.
 
-- `git worktree add .worktree/execplan-smoke -b test/execplan-smoke` succeeded.
-- `git worktree list` showed the root worktree on `main` and `.worktree/execplan-smoke` on `test/execplan-smoke`.
-- Root `git status --short` before commit showed only `.gitignore`, `docs/current-state.md`, and `exec-plans/002-git-worktree-execplan-smoke-test.md`.
-- `.worktree/execplan-smoke` `git status --short` was empty.
-- After commit, root `git status --short` was empty.
+## Not Yet
 
-Status: completed.
+- Gameplay implementation
+- game specification
+- Unity MCP
+- custom skills
+- hooks
+- subagents
+- third-party packages

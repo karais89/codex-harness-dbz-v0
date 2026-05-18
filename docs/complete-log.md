@@ -42,3 +42,13 @@
 [x] 필수 섹션이 있다
 [x] 자기완결성 원칙이 있다
 [x] ExecPlan 저장 위치와 파일 이름 규칙이 명시되어 있다
+
+## M0-7. 최소 상태 문서와 갱신 규칙 추가
+
+[x] docs/current-state.md가 있다
+[x] docs/current-state.md에 Current Stage, Active Plan, Next Step이 있다
+[x] docs/decisions.md가 있다
+[x] docs/decisions.md에 초기 장기 결정이 기록되어 있다
+[x] AGENTS.md에 docs/current-state.md와 docs/decisions.md를 읽는 규칙이 있다
+[x] AGENTS.md에 두 파일을 언제 업데이트해야 하는지 규칙이 있다
+[x] PLANS.md에 ExecPlan 결정 기록과 docs/decisions.md의 관계가 설명되어 있다
