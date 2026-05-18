@@ -19,3 +19,10 @@
 [x] origin remote 연결 완료
 [x] main 브랜치 push 완료
 [x] GitHub 웹에서 repo 확인 가능
+
+## M0-4. README.md 작성
+
+[x] README.md가 있다
+[x] 프로젝트 목적이 설명되어 있다
+[x] 현재 단계가 M0로 표시되어 있다
+[x] 아직 하지 않을 것이 명시되어 있다
