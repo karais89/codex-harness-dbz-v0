@@ -12,3 +12,10 @@
 [x] Unity용 .gitignore 추가
 [x] 첫 커밋 생성
 [x] git status clean
+
+## M0-3. GitHub repo 연결
+
+[x] GitHub repo 생성 완료 - https://github.com/karais89/codex-harness-dbz-v0
+[x] origin remote 연결 완료
+[x] main 브랜치 push 완료
+[x] GitHub 웹에서 repo 확인 가능
