@@ -8,6 +8,8 @@ Codex Harness v0 — Delivery Bot Zero
 
 M0 완료. M1 First Playable Loop 시작 준비 완료.
 
+M1 게임 브리프를 `docs/game-brief.md`에 작성했다. 아직 M1 구현은 시작하지 않았다.
+
 ## 활성 계획
 
 없음. M1을 시작하면 `exec-plans/004-first-playable-loop.md`를 생성한다.
@@ -29,15 +31,16 @@ M0 완료. M1 First Playable Loop 시작 준비 완료.
 - M1-0에서 M0 완료 상태를 확인했다.
 - Unity 6000.4.1f1 Editor 로그에서 `Assets/Scenes/SampleScene.unity` 로드와 프로젝트 로딩 완료를 확인했다.
 - GitHub `origin` remote와 M0 필수 문서 존재를 확인했다.
+- M1 게임 브리프를 `docs/game-brief.md`에 작성했다.
 
 ## 다음 단계
 
-M1-1에서 First Playable Loop 자동 실행 프롬프트를 사용해 `exec-plans/004-first-playable-loop.md`를 생성하고 실행한다.
+M1-1에서 `docs/game-brief.md`를 참조해 First Playable Loop ExecPlan인 `exec-plans/004-first-playable-loop.md`를 생성하고 실행한다.
 
 ## 아직 하지 않음
 
 - 게임플레이 구현
-- 게임 명세
+- M1 ExecPlan 생성
 - Unity MCP
 - 사용자 정의 skill
 - hook
