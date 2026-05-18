@@ -1,6 +1,6 @@
-# 워크플로우 규칙 개선 초안
+# 워크플로우 규칙 개선
 
-상태: 초안
+상태: 승인됨, 저장소 규칙 반영 완료
 
 목적: M1 같은 사소하지 않은 작업을 시작하기 전에 사용자 의도 확인, 공유된 이해 검증, ExecPlan 생성, 구현 승인 게이트를 정의한다.
 
@@ -200,22 +200,26 @@ ExecPlan 생성, 자체 리뷰, 사용자 검토용 요약까지 끝난 뒤 Code
 - https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md
 - https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md
 
-## 이후 반영 대상
+## 반영 대상
 
-이 초안이 승인되면 다음 문서에 실제 규칙으로 반영한다.
+이 문서는 승인되어 다음 문서에 실제 규칙으로 반영되었다.
 
 - `AGENTS.md`
 - `PLANS.md`
 - `docs/decisions.md`
 - `docs/current-state.md`
 
+반영 ExecPlan:
+
+- `exec-plans/005-workflow-rule-adoption.md`
+
 ## 검증 기준
 
-이 초안 문서는 다음을 만족하면 작성 완료로 본다.
+이 문서는 다음을 만족하면 반영 완료로 본다.
 
 - `docs/workflow-plan.md`가 존재한다.
 - 문서가 한글로 작성되어 있다.
-- 상태가 `초안`으로 명시되어 있다.
+- 상태가 승인 및 저장소 규칙 반영 완료로 명시되어 있다.
 - ExecPlan 전 인터뷰가 `grill-me` 기반으로 정의되어 있다.
 - 공유된 이해 검증 단계가 들어 있다.
 - ExecPlan 생성과 구현 승인 게이트가 분리되어 있다.
