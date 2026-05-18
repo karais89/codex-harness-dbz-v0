@@ -33,6 +33,7 @@
 [x] Codex read order가 있다
 [x] 금지사항이 있다
 [x] Done 기준이 있다
+[x] ExecPlan 사용 규칙이 한국어로 작성되어 있다
 
 ## M0-6. PLANS.md 작성
 

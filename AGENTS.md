@@ -33,7 +33,7 @@
 3. 활성 plan 또는 프로젝트 상태가 업데이트되어 있습니다.
 4. commit 후 `git status`가 clean입니다.
 
-## ExecPlans
+## 실행 계획 (ExecPlan)
 
 사소하지 않은 작업은 설계부터 구현까지 `PLANS.md`에 정의된 ExecPlan을 사용합니다.
 
