@@ -33,3 +33,10 @@
 [x] Codex read order가 있다
 [x] 금지사항이 있다
 [x] Done 기준이 있다
+
+## M0-6. PLANS.md 작성
+
+[x] PLANS.md가 있다
+[x] ExecPlan의 목적이 설명되어 있다
+[x] 필수 섹션이 있다
+[x] 자기완결성 원칙이 있다
