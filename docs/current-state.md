@@ -6,7 +6,7 @@ Codex Harness v0 — Delivery Bot Zero
 
 ## 현재 단계
 
-M0 완료. M1 First Playable Loop 시작 전 워크플로우 재논의 대기.
+M0 완료. M1 First Playable Loop 시작 전 `docs/workflow-plan.md` 수정 초안 검토 및 승인 대기.
 
 ## 활성 계획
 
@@ -29,12 +29,13 @@ M0 완료. M1 First Playable Loop 시작 전 워크플로우 재논의 대기.
 - M1-0에서 M0 완료 상태를 확인했다.
 - Unity 6000.4.1f1 Editor 로그에서 `Assets/Scenes/SampleScene.unity` 로드와 프로젝트 로딩 완료를 확인했다.
 - GitHub `origin` remote와 M0 필수 문서 존재를 확인했다.
+- `docs/workflow-plan.md` 초안을 `grill-me` 기반 인터뷰, 공유된 이해 검증, ExecPlan 생성 후 자체 리뷰, 구현 승인 게이트 흐름으로 수정했다.
 
 ## 다음 단계
 
-M1을 다시 시작하기 전에 `docs/workflow-plan.md` 초안을 검토하고, ExecPlan 생성 전 사용자 인터뷰, 범위 합의, 승인 흐름을 어떻게 둘지 확정한다.
+M1을 다시 시작하기 전에 수정된 `docs/workflow-plan.md` 초안을 검토하고 승인 여부를 결정한다.
 
-논의가 끝나면 합의된 워크플로우 규칙을 문서에 반영한 뒤 M1 범위 정의와 ExecPlan 생성을 다시 진행한다.
+초안이 승인되면 합의된 워크플로우 규칙을 문서에 반영한 뒤 M1 범위 정의와 ExecPlan 생성을 다시 진행한다.
 
 ## 아직 하지 않음
 
