@@ -6,7 +6,7 @@ Codex Harness v0 — Delivery Bot Zero
 
 ## 현재 단계
 
-M0 완료. M1 First Playable Loop 시작 준비 완료.
+M0 완료. M1 First Playable Loop 시작 전 워크플로우 재논의 대기.
 
 ## 활성 계획
 
@@ -32,12 +32,15 @@ M0 완료. M1 First Playable Loop 시작 준비 완료.
 
 ## 다음 단계
 
-M1-1에서 First Playable Loop 자동 실행 프롬프트를 사용해 `exec-plans/004-first-playable-loop.md`를 생성하고 실행한다.
+M1을 다시 시작하기 전에 ExecPlan 생성 전 사용자 인터뷰, 범위 합의, 승인 흐름을 어떻게 둘지 논의한다.
+
+논의가 끝나면 합의된 워크플로우 규칙을 문서에 반영한 뒤 M1 범위 정의와 ExecPlan 생성을 다시 진행한다.
 
 ## 아직 하지 않음
 
 - 게임플레이 구현
 - 게임 명세
+- M1 범위 합의
 - Unity MCP
 - 사용자 정의 skill
 - hook
