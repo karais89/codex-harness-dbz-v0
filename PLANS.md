@@ -58,6 +58,8 @@ ExecPlan은 저장소 루트의 `exec-plans/` 아래에 저장합니다.
 
 Player-facing gameplay ExecPlan을 작성하거나 갱신하기 전에 Codex는 승인된 Design 기준을 확인합니다.
 
+승인된 Design 기준은 `상태: 승인됨`인 실제 design 산출물(`docs/design/*.md`)만 될 수 있습니다. `상태: 작성 전`, `상태: 초안`, `상태: 수정 필요` 문서는 gameplay ExecPlan 기준으로 사용할 수 없습니다.
+
 확인 대상은 다음과 같습니다.
 
 1. `docs/design/README.md`가 존재한다.
@@ -65,6 +67,8 @@ Player-facing gameplay ExecPlan을 작성하거나 갱신하기 전에 Codex는 
 3. 해당 작업의 플레이어 경험 또는 게임 규칙을 정의하는 승인된 `docs/design/*.md` 문서가 최소 1개 있다.
 
 `docs/design/README.md`는 design 문서 작성 규약이므로 존재 확인 대상입니다. 승인 상태 확인 대상은 실제 design 산출물인 `docs/design/*.md` 파일입니다.
+
+`docs/design/core-beliefs.md`가 `상태: 작성 전`이면 파일이 존재해도 design 산출물이 아닙니다. 이 경우 Codex는 gameplay ExecPlan 작성을 멈추고 Core Beliefs 인터뷰와 공유된 이해 검증이 먼저 필요하다고 알립니다.
 
 `core-beliefs.md`만으로는 gameplay ExecPlan을 시작할 수 없습니다. `core-beliefs.md`는 프로젝트 방향 기준이고, gameplay ExecPlan은 해당 작업의 플레이어 경험 또는 게임 규칙을 정의하는 별도 승인 design 문서를 함께 참조해야 합니다.
 
