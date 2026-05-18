@@ -6,6 +6,20 @@ ExecPlan은 자기완결적인 실행 문서입니다. 새로운 Codex 세션이
 
 ExecPlan은 살아 있는 문서입니다. 작업이 진행되거나, 새 사실을 발견하거나, 결정이 바뀔 때마다 갱신해야 합니다.
 
+## ExecPlan 저장 위치와 파일 이름
+
+ExecPlan은 저장소 루트의 `exec-plans/` 아래에 저장합니다.
+
+파일 이름은 다음 형식을 사용합니다.
+
+`NNN-short-kebab-title.md`
+
+예시:
+
+- `exec-plans/001-bootstrap.md`
+- `exec-plans/002-first-playable-loop.md`
+- `exec-plans/003-play-mode-verification.md`
+
 ## ExecPlan을 사용하는 경우
 
 사소하지 않은 작업에는 ExecPlan을 사용합니다.

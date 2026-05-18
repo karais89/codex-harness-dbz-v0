@@ -14,7 +14,7 @@
 2. `AGENTS.md`
 3. `PLANS.md`가 있으면 읽습니다.
 4. `docs/current-state.md`가 있으면 읽습니다.
-5. 현재 ExecPlan이 있으면 읽습니다.
+5. `exec-plans/` 아래의 현재 ExecPlan이 있으면 읽습니다.
 
 ## 규칙
 
@@ -36,5 +36,7 @@
 ## 실행 계획 (ExecPlan)
 
 사소하지 않은 작업은 설계부터 구현까지 `PLANS.md`에 정의된 ExecPlan을 사용합니다.
+
+ExecPlan은 저장소 루트의 `exec-plans/` 아래에 생성하고 유지합니다.
 
 관련 ExecPlan이 존재하거나 갱신되기 전에는 구현을 시작하지 않습니다.
