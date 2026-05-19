@@ -105,25 +105,31 @@
 
 ## M1 - 완료 기준
 
-[ ] exec-plans/004-first-playable-loop.md 상태가 완료됨이다.
-[ ] 구현 승인 후 상태가 진행 중 → 완료됨으로 갱신됐다.
-[ ] M1 gameplay 스크립트가 추가됐다.
-[ ] Unity 프로젝트가 컴파일 오류 없이 열린다.
-[ ] SampleScene에서 Play Mode를 시작할 수 있다.
-[ ] 작은 격자, 로봇, 물건, 목적지, 막힌 칸이 보인다.
-[ ] 로봇은 BOT, 물건은 BOX, 목적지는 GOAL 표식으로 구분된다.
-[ ] BOT, BOX, GOAL 표식이 각 색상 오브젝트 안에 들어온다.
-[ ] 방향키/WASD로 한 칸 이동이 가능하다.
-[ ] 벽/격자 밖 입력은 이동하지 않고 턴도 소모하지 않는다.
-[ ] 물건 칸에 도착하면 자동 Pickup 된다.
-[ ] 물건 보유 상태로 목적지에 도착하면 Clear 된다.
-[ ] 턴 제한 안에 배달하지 못하면 Failed 된다.
-[ ] Clear/Failed 후 입력이 잠긴다.
-[ ] Retry로 같은 레벨이 초기화된다.
-[ ] UI에 남은 턴, 물건 보유 여부, 결과 상태, Retry가 표시된다.
-[ ] Console에 새 오류가 없다.
-[ ] 검증 결과가 exec-plans/004-first-playable-loop.md에 기록됐다.
-[ ] docs/current-state.md가 M1 완료 상태로 갱신됐다.
-[ ] 필요한 경우 docs/decisions.md에 장기 결정이 기록됐다.
-[ ] 구현 완료 커밋이 있다.
-[ ] git status --short 결과가 비어 있다.
+[x] exec-plans/004-first-playable-loop.md 상태가 완료됨이다.
+[x] 구현 승인 후 상태가 진행 중 → 완료됨으로 갱신됐다.
+[x] M1 gameplay 스크립트가 추가됐다.
+[x] Unity 프로젝트가 컴파일 오류 없이 열린다.
+[x] SampleScene에서 Play Mode를 시작할 수 있다.
+[x] 작은 격자, 로봇, 물건, 목적지, 막힌 칸이 보인다.
+[x] 로봇은 BOT, 물건은 BOX, 목적지는 GOAL 표식으로 구분된다.
+[x] BOT, BOX, GOAL 표식이 각 색상 오브젝트 안에 들어온다.
+[x] 방향키/WASD로 한 칸 이동이 가능하다.
+[x] 벽/격자 밖 입력은 이동하지 않고 턴도 소모하지 않는다.
+[x] 물건 칸에 도착하면 자동 Pickup 된다.
+[x] 물건 보유 상태로 목적지에 도착하면 Clear 된다.
+[x] 턴 제한 안에 배달하지 못하면 Failed 된다.
+[x] Clear/Failed 후 입력이 잠긴다.
+[x] Retry로 같은 레벨이 초기화된다.
+[x] UI에 남은 턴, 물건 보유 여부, 결과 상태, Retry가 표시된다.
+[x] Console에 새 오류가 없다.
+[x] 검증 결과가 exec-plans/004-first-playable-loop.md에 기록됐다.
+[x] docs/current-state.md가 M1 완료 상태로 갱신됐다.
+[x] 필요한 경우 docs/decisions.md에 장기 결정이 기록됐다.
+[x] 구현 완료 커밋이 있다.
+[x] git status --short 결과가 비어 있다.
+
+검증 메모:
+
+- `dotnet build codex-harness-dbz-v0.sln`은 경고 0개, 오류 0개로 통과했다.
+- 사용자가 Unity Play Mode 수동 검증 10단계를 모두 통과했다고 확인했다.
+- M1 내부 구현 조정 외 새 장기 결정은 없어 `docs/decisions.md`는 갱신하지 않았다.

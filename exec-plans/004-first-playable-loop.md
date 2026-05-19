@@ -17,7 +17,7 @@
 
 ## 진행 상황
 
-상태: 진행 중
+상태: 완료됨
 
 - [x] M1 gameplay loop 인터뷰와 공유된 이해 검증을 완료했다.
 - [x] `docs/design/core-beliefs.md`가 `상태: 승인됨`임을 확인했다.
@@ -31,7 +31,7 @@
 - [x] M1 gameplay 스크립트를 추가했다.
 - [x] 명령 기반 C# 컴파일 검증을 완료했다.
 - [x] Unity batchmode 검증 시도 결과를 기록했다.
-- [ ] Unity Play Mode에서 핵심 루프를 수동 검증했다.
+- [x] Unity Play Mode에서 핵심 루프를 수동 검증했다.
 - [x] 검증 결과와 예상 밖 발견을 이 ExecPlan에 기록했다.
 - [x] `docs/current-state.md`를 M1 구현 결과에 맞게 갱신했다.
 - [x] 구현 완료 커밋 후 `git status`가 clean임을 확인했다.
@@ -40,7 +40,7 @@
 
 저장소는 `Codex Harness v0 — Delivery Bot Zero`이며, 작은 Unity 2D 퍼즐 게임을 사용해 최소 Codex 주도 Unity 개발 워크플로우를 검증하는 실험이다.
 
-현재 M0는 완료되었다. Unity 프로젝트는 Unity `6000.4.1f1`로 생성되어 있고, 현재 플레이 가능한 gameplay 구현은 없다.
+계획 시작 당시 M0는 완료되었고, Unity 프로젝트는 Unity `6000.4.1f1`로 생성되어 있었으며, 플레이 가능한 gameplay 구현은 없었다. 이 계획 완료 후에는 M1 First Playable Loop gameplay 구현과 Unity Play Mode 수동 검증이 완료된 상태다.
 
 현재 관련 파일과 폴더는 다음과 같다.
 
@@ -146,8 +146,18 @@ M1 완료 전까지 hooks, MCP, custom skills, subagents, 별도 template 폴더
 - `dotnet build codex-harness-dbz-v0.sln --no-restore`: `Temp/obj/Assembly-CSharp/project.assets.json` 누락으로 한 차례 실패했다. 일반 `dotnet build`가 복원을 수행한 뒤 경고 0개, 오류 0개로 통과했다.
 - Unity batchmode 명령: 실행 시도했으나 같은 프로젝트를 연 Unity Editor 인스턴스가 이미 있어 중단됐다. 로그 파일은 `Logs/m1-batchmode.log`에 생성됐다.
 - 열린 Unity Editor 확인: `Unity` 프로세스가 `codex-harness-dbz-v0 - SampleScene - Windows, Mac, Linux - Unity 6.4 (6000.4.1f1) <DX11>` 창 제목으로 실행 중임을 확인했다.
-- Unity Editor 로그 확인: 기존 프로젝트 로드와 `SampleScene` 로드는 확인했지만, 새 `FirstPlayableLoop.cs`의 Play Mode 동작은 이 세션에서 직접 검증하지 못했다.
-- 아직 필요한 검증: 열린 Unity Editor에서 Play Mode를 시작해 이동, Pickup, Deliver, 실패, Retry, Console 오류 여부를 수동 확인해야 한다.
+- Unity Editor 로그 확인: 기존 프로젝트 로드와 `SampleScene` 로드를 확인했다.
+- 사용자 수동 검증: 열린 Unity Editor에서 `SampleScene` Play Mode를 실행해 핵심 루프를 확인했고, 아래 항목이 모두 통과했다.
+  - Play Mode 시작과 Console 초기화.
+  - 5 x 5 격자, 파란색 `BOT` 로봇, 노란색 `BOX` 물건, 초록색 `GOAL` 목적지, 막힌 칸 3개, 최소 UI 표시.
+  - Play Mode 시작 직후 `Turns: 14`, `Cargo: No`, `State: Running`.
+  - 방향키와 WASD 한 칸 이동, 유효 이동 시 턴 1 감소.
+  - 벽과 격자 밖 입력 시 이동 없음, 턴 미소모.
+  - `BOX` 칸 도착 시 자동 Pickup, `Cargo: Yes`, `BOX` 숨김.
+  - `Cargo: Yes` 상태로 `GOAL` 도착 시 `State: Clear`, 이후 이동 입력 잠김.
+  - 배달하지 않고 턴을 0까지 소모하면 `State: Failed`, 이후 이동 입력 잠김.
+  - Retry 버튼 클릭 시 시작 위치, `BOX`, `Turns: 14`, `Cargo: No`, `State: Running`으로 초기화.
+  - Play Mode 중 새 Error와 새 Warning 없음.
 - 사용자 수동 검증 2단계에서 로봇, 물건, 목적지가 색상으로는 구분되지만 명시 표식이 없다는 피드백이 나왔다. 이에 따라 로봇에는 `BOT`, 물건에는 `BOX`, 목적지에는 `GOAL` 표식을 추가했다.
 - 표식 추가 후 사용자 수동 검증에서 `BOT`, `BOX`, `GOAL` 글자가 너무 커서 칸을 침범한다는 피드백이 나왔다. 이에 따라 표식 크기를 줄였다.
 
@@ -191,10 +201,10 @@ M1 완료 전까지 hooks, MCP, custom skills, subagents, 별도 template 폴더
 
 ## 회고
 
-아직 Play Mode 검증 전이다.
+M1 First Playable Loop 구현과 검증을 완료했다.
 
-- 완료한 것: M1 gameplay design 기준 승인 확인, 이 ExecPlan 생성, M1 gameplay 스크립트 추가, 명령 기반 C# 컴파일 검증.
-- 완료하지 못한 것: Unity Play Mode 핵심 루프 수동 검증, M1 완료 상태 문서화.
-- 배운 것: 현재 프로젝트가 Unity Editor에서 열려 있으면 batchmode 검증은 중단된다.
-- 다음에 해야 할 것: 열린 Unity Editor에서 Play Mode를 실행해 이동, Pickup, Deliver, 실패, Retry를 수동 검증한다.
-- 다음 계획을 시작할 준비가 되었는지 여부: 아니다. 이 ExecPlan의 구현과 검증이 먼저 필요하다.
+- 완료한 것: M1 gameplay design 기준 승인 확인, 이 ExecPlan 생성, M1 gameplay 스크립트 추가, 명령 기반 C# 컴파일 검증, Unity Play Mode 수동 검증, M1 완료 상태 문서화.
+- 완료하지 못한 것: 없음. M1 범위 밖인 게임 명세, Unity MCP, custom skills, hooks, subagents, 외부 패키지는 추가하지 않았다.
+- 배운 것: 현재 프로젝트가 Unity Editor에서 열려 있으면 batchmode 검증은 중단된다. 색상만으로 로봇, 물건, 목적지를 구분하면 읽기 쉬움이 부족해질 수 있어 최소 표식이 도움이 된다.
+- 다음에 해야 할 것: M2 Change Request 범위를 논의한다.
+- 다음 계획을 시작할 준비가 되었는지 여부: 예. M2를 시작하려면 기존 M1 기능을 깨지 않는 작은 변경 요청을 먼저 논의한다.
