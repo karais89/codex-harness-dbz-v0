@@ -137,12 +137,15 @@ namespace DeliveryBotZero
             }
 
             GameObject destinationObject = CreateTile("Destination", DestinationPosition, new Color(0.2f, 0.72f, 0.38f), 0.74f, 1);
+            AddWorldLabel(destinationObject, "GOAL", Color.white, 4);
             destinationObject.transform.SetParent(boardRoot.transform, true);
 
             itemObject = CreateTile("Package", ItemPosition, new Color(0.95f, 0.78f, 0.18f), 0.5f, 2);
+            AddWorldLabel(itemObject, "BOX", Color.black, 5);
             itemObject.transform.SetParent(boardRoot.transform, true);
 
             robotObject = CreateTile("Delivery Bot", StartPosition, new Color(0.12f, 0.48f, 0.95f), 0.62f, 3);
+            AddWorldLabel(robotObject, "BOT", Color.white, 6);
             robotObject.transform.SetParent(boardRoot.transform, true);
         }
 
@@ -156,6 +159,36 @@ namespace DeliveryBotZero
             tile.transform.position = GridToWorld(gridPosition);
             tile.transform.localScale = new Vector3(scale * CellSize, scale * CellSize, 1f);
             return tile;
+        }
+
+        private void AddWorldLabel(GameObject parent, string label, Color color, int sortingOrder)
+        {
+            GameObject labelObject = new GameObject(label + " Label");
+            labelObject.transform.SetParent(parent.transform, false);
+            labelObject.transform.localPosition = new Vector3(0f, 0f, -0.01f);
+            labelObject.transform.localScale = Vector3.one;
+
+            TextMesh textMesh = labelObject.AddComponent<TextMesh>();
+            textMesh.text = label;
+            textMesh.anchor = TextAnchor.MiddleCenter;
+            textMesh.alignment = TextAlignment.Center;
+            textMesh.characterSize = 0.18f;
+            textMesh.fontSize = 40;
+            textMesh.color = color;
+
+            Font font = GetDefaultFont();
+            if (font != null)
+            {
+                textMesh.font = font;
+            }
+
+            MeshRenderer renderer = labelObject.GetComponent<MeshRenderer>();
+            if (font != null)
+            {
+                renderer.sharedMaterial = font.material;
+            }
+
+            renderer.sortingOrder = sortingOrder;
         }
 
         private void BuildUi()

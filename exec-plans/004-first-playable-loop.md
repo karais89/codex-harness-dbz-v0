@@ -93,7 +93,7 @@ M1 완료 전까지 hooks, MCP, custom skills, subagents, 별도 template 폴더
    - Retry는 시작 위치, 물건 보유 상태, 결과 상태, 남은 턴, 표시 상태를 모두 초기화한다.
 
 6. 최소 시각화와 UI를 구현한다.
-   - 기본 도형과 색상만 사용해 배경 격자, 막힌 칸, 로봇, 물건, 목적지를 구분한다.
+   - 기본 도형, 색상, 짧은 텍스트 표식을 사용해 배경 격자, 막힌 칸, 로봇, 물건, 목적지를 구분한다.
    - 외부 이미지 에셋을 추가하지 않는다.
    - UI에는 남은 턴, 물건 보유 여부, 결과 상태, Retry 버튼을 표시한다.
    - UI는 M1 검증용 최소 표현으로 유지하고, 레벨 선택이나 도움말 화면을 추가하지 않는다.
@@ -117,6 +117,7 @@ M1 완료 전까지 hooks, MCP, custom skills, subagents, 별도 template 폴더
 - Unity 프로젝트가 컴파일 오류 없이 열린다.
 - `Assets/Scenes/SampleScene.unity`가 존재하고 Play Mode를 시작할 수 있다.
 - Play Mode 시작 시 작은 격자, 로봇, 물건, 목적지, 막힌 칸이 보인다.
+- 로봇은 파란색 `BOT`, 물건은 노란색 `BOX`, 목적지는 초록색 `GOAL`로 구분된다.
 - UI에 남은 턴, 물건 보유 여부, 결과 상태, Retry 버튼이 보인다.
 - 방향키와 WASD로 유효한 인접 칸 이동이 가능하다.
 - 유효 이동 1회마다 남은 턴이 1 줄어든다.
@@ -146,6 +147,7 @@ M1 완료 전까지 hooks, MCP, custom skills, subagents, 별도 template 폴더
 - 열린 Unity Editor 확인: `Unity` 프로세스가 `codex-harness-dbz-v0 - SampleScene - Windows, Mac, Linux - Unity 6.4 (6000.4.1f1) <DX11>` 창 제목으로 실행 중임을 확인했다.
 - Unity Editor 로그 확인: 기존 프로젝트 로드와 `SampleScene` 로드는 확인했지만, 새 `FirstPlayableLoop.cs`의 Play Mode 동작은 이 세션에서 직접 검증하지 못했다.
 - 아직 필요한 검증: 열린 Unity Editor에서 Play Mode를 시작해 이동, Pickup, Deliver, 실패, Retry, Console 오류 여부를 수동 확인해야 한다.
+- 사용자 수동 검증 2단계에서 로봇, 물건, 목적지가 색상으로는 구분되지만 명시 표식이 없다는 피드백이 나왔다. 이에 따라 로봇에는 `BOT`, 물건에는 `BOX`, 목적지에는 `GOAL` 표식을 추가했다.
 
 ## 자체 리뷰
 
@@ -175,9 +177,14 @@ M1 완료 전까지 hooks, MCP, custom skills, subagents, 별도 template 폴더
   근거: 승인된 `docs/design/gameplay-loop.md`는 정확한 좌표와 수치를 ExecPlan 또는 구현 검증 단계에서 작고 읽기 쉬운 범위 안에서 정할 수 있다고 했다. 이 배치는 단일 고정 레벨, 2-3개 막힌 칸, 한두 번 실수해도 재시도 가능한 턴 제한 범위를 만족한다.
   날짜: 2026-05-19
 
+- 결정: 로봇, 물건, 목적지는 색상뿐 아니라 `BOT`, `BOX`, `GOAL` 텍스트 표식으로도 구분한다.
+  근거: 사용자 수동 검증 중 색상만으로 판단된다는 피드백이 있었다. M1의 `짧고 읽기 쉬운 배달 퍼즐 루프` 기준을 더 잘 만족하려면 색상에만 의존하지 않는 표식이 필요하다.
+  날짜: 2026-05-19
+
 ## 예상 밖 발견
 
 - Unity batchmode 검증은 같은 프로젝트를 연 Unity Editor 인스턴스가 이미 있으면 실행되지 않는다. 이번 세션에서는 `dotnet build`로 C# 컴파일은 확인했지만, Play Mode 수동 검증은 열린 Editor에서 별도로 확인해야 한다.
+- 사용자 수동 검증에서 로봇, 물건, 목적지가 색상으로만 구분된다는 점을 발견했다. M1 가독성을 위해 `BOT`, `BOX`, `GOAL` 표식을 추가했다.
 
 ## 회고
 
