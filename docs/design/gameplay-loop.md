@@ -1,10 +1,12 @@
 # Gameplay Loop
 
-상태: 초안
+상태: 승인됨
 
 ## 목적
 
 이 문서는 M1 First Playable Loop에서 사용할 `Start -> Move -> Pickup -> Deliver -> Result -> Retry`의 player-facing gameplay 기준을 정의한다.
+
+이 문서는 2026-05-19에 사용자가 명시적으로 승인했다. Codex는 이 문서를 M1 First Playable Loop의 gameplay design 기준으로 사용할 수 있다.
 
 이 문서는 구현 방식, C# 구조, Unity 씬 구성 세부를 정하지 않는다. M1 ExecPlan은 이 문서를 기준으로 플레이어가 직접 경험하는 규칙을 구현 방법과 검증 절차로 옮긴다.
 
@@ -59,5 +61,5 @@
 
 ## 승인 체크리스트
 
-- [ ] 사용자가 이 문서의 상태를 `승인됨`으로 바꾸라고 명시했다.
+- [x] 사용자가 이 문서의 상태를 `승인됨`으로 바꾸라고 명시했다.
 - [ ] 관련 gameplay ExecPlan이 새 규칙을 발명하지 않고 이 문서를 참조한다.
