@@ -17,7 +17,7 @@ M2는 위 두 문서가 이미 승인한 최소 UI 피드백과 Retry 규칙의 
 
 ## 진행 상황
 
-상태: 구현 승인 대기
+상태: Unity Play Mode 수동 검증 대기
 
 - [x] M1 완료 상태를 확인했다.
 - [x] M2 범위를 논의했다.
@@ -26,13 +26,13 @@ M2는 위 두 문서가 이미 승인한 최소 UI 피드백과 Retry 규칙의 
 - [x] 이 ExecPlan을 생성했다.
 - [x] Codex 자체 리뷰를 완료했다.
 - [x] 사용자에게 검토용 요약을 제공했다.
-- [ ] 사용자가 구현 시작을 승인했다.
-- [ ] 구현 시작 후 상태를 `진행 중`으로 갱신한다.
-- [ ] M2 UI 읽기성 개선을 적용한다.
-- [ ] 명령 기반 C# 컴파일 검증을 완료한다.
+- [x] 사용자가 구현 시작을 승인했다.
+- [x] 구현 시작 후 상태를 `진행 중`으로 갱신한다.
+- [x] M2 UI 읽기성 개선을 적용한다.
+- [x] 명령 기반 C# 컴파일 검증을 완료한다.
 - [ ] Unity Play Mode에서 M1 회귀 검증과 M2 읽기성 검증을 완료한다.
-- [ ] 검증 결과와 예상 밖 발견을 이 ExecPlan에 기록한다.
-- [ ] `docs/current-state.md`를 M2 구현 결과에 맞게 갱신한다.
+- [x] 검증 결과와 예상 밖 발견을 이 ExecPlan에 기록한다.
+- [x] `docs/current-state.md`를 M2 구현 결과에 맞게 갱신한다.
 - [ ] 구현 완료 커밋 후 `git status`가 clean임을 확인한다.
 
 ## 맥락
@@ -128,7 +128,11 @@ M1 완료 당시 Unity Play Mode 수동 검증에서 다음 핵심 동작이 통
 
 현재 검증 결과:
 
-- 구현 승인 전이므로 아직 M2 구현 검증을 수행하지 않았다.
+- `dotnet build codex-harness-dbz-v0.sln`: 통과. 경고 0개, 오류 0개.
+- Unity batchmode 명령: 실행 시도했으나 같은 프로젝트를 연 Unity Editor 인스턴스가 이미 있어 중단됐다. 출력은 `It looks like another Unity instance is running with this project open.`로 확인했다.
+- 열린 Unity Editor 확인: `Unity` 프로세스가 `codex-harness-dbz-v0 - SampleScene - Windows, Mac, Linux - Unity 6.4 (6000.4.1f1) <DX11>` 창 제목으로 실행 중임을 확인했다.
+- Unity Editor 로그 확인: `Mono: successfully reloaded assembly`를 확인했고, 확인한 로그 tail에서 새 C# 컴파일 오류는 보이지 않았다.
+- Unity Play Mode 수동 검증: 아직 수행하지 않았다. M2 UI 가독성 확인과 M1 회귀 검증은 열린 Unity Editor에서 수동으로 확인해야 한다.
 
 ## 자체 리뷰
 
@@ -155,8 +159,8 @@ M1 완료 당시 Unity Play Mode 수동 검증에서 다음 핵심 동작이 통
 
 ## 예상 밖 발견
 
-- 없음. 구현 중 새 사실이 발견되면 이 섹션에 기록한다.
+- M2에서도 M1 때와 동일하게 같은 프로젝트를 연 Unity Editor 인스턴스가 있으면 Unity batchmode 검증이 중단된다. 이번에는 `dotnet build`와 열린 Editor 로그로 컴파일 상태를 확인했고, Play Mode 조작 검증은 수동 검증 대기로 남겼다.
 
 ## 회고
 
-구현 완료 후 작성한다.
+Unity Play Mode 수동 검증 완료 후 작성한다.

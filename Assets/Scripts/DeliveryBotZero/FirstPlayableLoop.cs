@@ -30,6 +30,7 @@ namespace DeliveryBotZero
         private Sprite squareSprite;
         private GameObject robotObject;
         private GameObject itemObject;
+        private Text objectiveText;
         private Text turnsText;
         private Text cargoText;
         private Text stateText;
@@ -207,9 +208,10 @@ namespace DeliveryBotZero
 
             Font font = GetDefaultFont();
 
-            turnsText = CreateText(canvasObject.transform, "Turns", font, new Vector2(24f, -24f));
-            cargoText = CreateText(canvasObject.transform, "Cargo", font, new Vector2(24f, -58f));
-            stateText = CreateText(canvasObject.transform, "State", font, new Vector2(24f, -92f));
+            objectiveText = CreateText(canvasObject.transform, "Goal", font, new Vector2(24f, -24f), 24, new Vector2(680f, 34f));
+            turnsText = CreateText(canvasObject.transform, "Turns", font, new Vector2(24f, -66f), 24, new Vector2(420f, 32f));
+            cargoText = CreateText(canvasObject.transform, "Cargo", font, new Vector2(24f, -100f), 24, new Vector2(420f, 32f));
+            stateText = CreateText(canvasObject.transform, "Status", font, new Vector2(24f, -134f), 24, new Vector2(680f, 32f));
             CreateRetryButton(canvasObject.transform, font);
         }
 
@@ -226,14 +228,14 @@ namespace DeliveryBotZero
             spawnedObjects.Add(eventSystemObject);
         }
 
-        private Text CreateText(Transform parent, string objectName, Font font, Vector2 anchoredPosition)
+        private Text CreateText(Transform parent, string objectName, Font font, Vector2 anchoredPosition, int fontSize, Vector2 size)
         {
             GameObject textObject = new GameObject(objectName);
             textObject.transform.SetParent(parent, false);
 
             Text text = textObject.AddComponent<Text>();
             text.font = font;
-            text.fontSize = 24;
+            text.fontSize = fontSize;
             text.color = Color.white;
             text.alignment = TextAnchor.MiddleLeft;
 
@@ -242,7 +244,7 @@ namespace DeliveryBotZero
             rectTransform.anchorMax = new Vector2(0f, 1f);
             rectTransform.pivot = new Vector2(0f, 1f);
             rectTransform.anchoredPosition = anchoredPosition;
-            rectTransform.sizeDelta = new Vector2(420f, 32f);
+            rectTransform.sizeDelta = size;
 
             return text;
         }
@@ -263,14 +265,14 @@ namespace DeliveryBotZero
             rectTransform.anchorMin = new Vector2(0f, 1f);
             rectTransform.anchorMax = new Vector2(0f, 1f);
             rectTransform.pivot = new Vector2(0f, 1f);
-            rectTransform.anchoredPosition = new Vector2(24f, -134f);
-            rectTransform.sizeDelta = new Vector2(132f, 44f);
+            rectTransform.anchoredPosition = new Vector2(24f, -178f);
+            rectTransform.sizeDelta = new Vector2(168f, 44f);
 
             GameObject labelObject = new GameObject("Label");
             labelObject.transform.SetParent(buttonObject.transform, false);
             Text label = labelObject.AddComponent<Text>();
             label.font = font;
-            label.text = "Retry";
+            label.text = "Retry Level";
             label.fontSize = 22;
             label.color = Color.white;
             label.alignment = TextAnchor.MiddleCenter;
@@ -381,9 +383,11 @@ namespace DeliveryBotZero
 
         private void UpdateUi()
         {
-            turnsText.text = "Turns: " + remainingTurns;
-            cargoText.text = "Cargo: " + (hasItem ? "Yes" : "No");
-            stateText.text = "State: " + GetStateLabel();
+            objectiveText.text = "Goal: Pick up BOX, then deliver it to GOAL.";
+            turnsText.text = "Turns Left: " + remainingTurns;
+            cargoText.text = "Cargo: " + (hasItem ? "BOX loaded" : "No BOX");
+            stateText.text = "Status: " + GetStateLabel();
+            stateText.color = GetStateColor();
         }
 
         private string GetStateLabel()
@@ -391,11 +395,24 @@ namespace DeliveryBotZero
             switch (resultState)
             {
                 case ResultState.Clear:
-                    return "Clear";
+                    return "Delivered. Level clear.";
                 case ResultState.Failed:
-                    return "Failed";
+                    return "Out of turns. Retry the level.";
                 default:
-                    return "Running";
+                    return hasItem ? "Deliver BOX to GOAL." : "Pick up BOX.";
+            }
+        }
+
+        private Color GetStateColor()
+        {
+            switch (resultState)
+            {
+                case ResultState.Clear:
+                    return new Color(0.38f, 0.95f, 0.58f);
+                case ResultState.Failed:
+                    return new Color(1f, 0.58f, 0.4f);
+                default:
+                    return Color.white;
             }
         }
 
