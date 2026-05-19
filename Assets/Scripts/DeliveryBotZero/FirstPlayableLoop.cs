@@ -10,21 +10,9 @@ namespace DeliveryBotZero
 {
     public sealed class FirstPlayableLoop : MonoBehaviour
     {
-        private const int GridWidth = 5;
-        private const int GridHeight = 5;
-        private const int TurnLimit = 14;
         private const float CellSize = 1.1f;
 
-        private static readonly Vector2Int StartPosition = new Vector2Int(0, 0);
-        private static readonly Vector2Int ItemPosition = new Vector2Int(4, 0);
-        private static readonly Vector2Int DestinationPosition = new Vector2Int(4, 4);
-        private static readonly HashSet<Vector2Int> Walls = new HashSet<Vector2Int>
-        {
-            new Vector2Int(1, 0),
-            new Vector2Int(1, 1),
-            new Vector2Int(3, 2)
-        };
-
+        private readonly DeliveryLoopState loopState = new DeliveryLoopState();
         private readonly List<GameObject> spawnedObjects = new List<GameObject>();
 
         private Sprite squareSprite;
@@ -34,18 +22,6 @@ namespace DeliveryBotZero
         private Text turnsText;
         private Text cargoText;
         private Text stateText;
-
-        private Vector2Int robotPosition;
-        private int remainingTurns;
-        private bool hasItem;
-        private ResultState resultState;
-
-        private enum ResultState
-        {
-            Running,
-            Clear,
-            Failed
-        }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Bootstrap()
@@ -75,7 +51,7 @@ namespace DeliveryBotZero
 
         private void Update()
         {
-            if (resultState != ResultState.Running)
+            if (loopState.ResultState != DeliveryLoopResultState.Running)
             {
                 return;
             }
@@ -125,27 +101,27 @@ namespace DeliveryBotZero
             GameObject boardRoot = new GameObject("M1 Board");
             spawnedObjects.Add(boardRoot);
 
-            for (int y = 0; y < GridHeight; y++)
+            for (int y = 0; y < DeliveryLoopState.GridHeight; y++)
             {
-                for (int x = 0; x < GridWidth; x++)
+                for (int x = 0; x < DeliveryLoopState.GridWidth; x++)
                 {
                     Vector2Int cell = new Vector2Int(x, y);
-                    bool isWall = Walls.Contains(cell);
+                    bool isWall = DeliveryLoopState.IsWall(cell);
                     Color color = isWall ? new Color(0.18f, 0.2f, 0.23f) : new Color(0.82f, 0.86f, 0.9f);
                     GameObject cellObject = CreateTile("Cell " + x + "," + y, cell, color, 0.96f, 0);
                     cellObject.transform.SetParent(boardRoot.transform, true);
                 }
             }
 
-            GameObject destinationObject = CreateTile("Destination", DestinationPosition, new Color(0.2f, 0.72f, 0.38f), 0.74f, 1);
+            GameObject destinationObject = CreateTile("Destination", DeliveryLoopState.DestinationPosition, new Color(0.2f, 0.72f, 0.38f), 0.74f, 1);
             AddWorldLabel(destinationObject, "GOAL", Color.white, 4);
             destinationObject.transform.SetParent(boardRoot.transform, true);
 
-            itemObject = CreateTile("Package", ItemPosition, new Color(0.95f, 0.78f, 0.18f), 0.5f, 2);
+            itemObject = CreateTile("Package", DeliveryLoopState.ItemPosition, new Color(0.95f, 0.78f, 0.18f), 0.5f, 2);
             AddWorldLabel(itemObject, "BOX", Color.black, 5);
             itemObject.transform.SetParent(boardRoot.transform, true);
 
-            robotObject = CreateTile("Delivery Bot", StartPosition, new Color(0.12f, 0.48f, 0.95f), 0.62f, 3);
+            robotObject = CreateTile("Delivery Bot", DeliveryLoopState.StartPosition, new Color(0.12f, 0.48f, 0.95f), 0.62f, 3);
             AddWorldLabel(robotObject, "BOT", Color.white, 6);
             robotObject.transform.SetParent(boardRoot.transform, true);
         }
@@ -328,103 +304,74 @@ namespace DeliveryBotZero
 
         private void TryMove(Vector2Int direction)
         {
-            Vector2Int nextPosition = robotPosition + direction;
-            if (!IsInsideGrid(nextPosition) || Walls.Contains(nextPosition))
+            if (!loopState.TryMove(direction))
             {
                 return;
             }
 
-            robotPosition = nextPosition;
-            remainingTurns--;
-            robotObject.transform.position = GridToWorld(robotPosition);
-
-            ResolveCellEffects();
-            if (resultState == ResultState.Running && remainingTurns <= 0)
-            {
-                resultState = ResultState.Failed;
-            }
-
+            SyncBoardObjects();
             UpdateUi();
-        }
-
-        private void ResolveCellEffects()
-        {
-            if (!hasItem && robotPosition == ItemPosition)
-            {
-                hasItem = true;
-                itemObject.SetActive(false);
-            }
-
-            if (hasItem && robotPosition == DestinationPosition)
-            {
-                resultState = ResultState.Clear;
-            }
         }
 
         private void ResetLevel()
         {
-            robotPosition = StartPosition;
-            remainingTurns = TurnLimit;
-            hasItem = false;
-            resultState = ResultState.Running;
+            loopState.Reset();
+            SyncBoardObjects();
+            UpdateUi();
+        }
 
+        private void SyncBoardObjects()
+        {
             if (robotObject != null)
             {
-                robotObject.transform.position = GridToWorld(robotPosition);
+                robotObject.transform.position = GridToWorld(loopState.RobotPosition);
             }
 
             if (itemObject != null)
             {
-                itemObject.SetActive(true);
+                itemObject.SetActive(!loopState.HasItem);
             }
-
-            UpdateUi();
         }
 
         private void UpdateUi()
         {
             objectiveText.text = "Goal: Pick up BOX, then deliver it to GOAL.";
-            turnsText.text = "Turns Left: " + remainingTurns;
-            cargoText.text = "Cargo: " + (hasItem ? "BOX loaded" : "No BOX");
+            turnsText.text = "Turns Left: " + loopState.RemainingTurns;
+            cargoText.text = "Cargo: " + (loopState.HasItem ? "BOX loaded" : "No BOX");
             stateText.text = "Status: " + GetStateLabel();
             stateText.color = GetStateColor();
         }
 
         private string GetStateLabel()
         {
-            switch (resultState)
+            switch (loopState.ResultState)
             {
-                case ResultState.Clear:
+                case DeliveryLoopResultState.Clear:
                     return "Delivered.";
-                case ResultState.Failed:
+                case DeliveryLoopResultState.Failed:
                     return "Out of turns.";
                 default:
-                    return hasItem ? "Deliver to GOAL." : "Pick up BOX.";
+                    return loopState.HasItem ? "Deliver to GOAL." : "Pick up BOX.";
             }
         }
 
         private Color GetStateColor()
         {
-            switch (resultState)
+            switch (loopState.ResultState)
             {
-                case ResultState.Clear:
+                case DeliveryLoopResultState.Clear:
                     return new Color(0.38f, 0.95f, 0.58f);
-                case ResultState.Failed:
+                case DeliveryLoopResultState.Failed:
                     return new Color(1f, 0.58f, 0.4f);
                 default:
                     return Color.white;
             }
         }
 
-        private static bool IsInsideGrid(Vector2Int position)
-        {
-            return position.x >= 0 && position.x < GridWidth && position.y >= 0 && position.y < GridHeight;
-        }
-
         private static Vector3 GridToWorld(Vector2Int position)
         {
-            float offsetX = (GridWidth - 1) * CellSize * 0.5f;
-            float offsetY = (GridHeight - 1) * CellSize * 0.5f;
+            float offsetX = (DeliveryLoopState.GridWidth - 1) * CellSize * 0.5f;
+            float offsetY = (DeliveryLoopState.GridHeight - 1) * CellSize * 0.5f;
             return new Vector3(position.x * CellSize - offsetX, position.y * CellSize - offsetY, 0f);
         }
     }

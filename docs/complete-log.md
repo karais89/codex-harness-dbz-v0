@@ -133,3 +133,29 @@
 - `dotnet build codex-harness-dbz-v0.sln`은 경고 0개, 오류 0개로 통과했다.
 - 사용자가 Unity Play Mode 수동 검증 10단계를 모두 통과했다고 확인했다.
 - M1 내부 구현 조정 외 새 장기 결정은 없어 `docs/decisions.md`는 갱신하지 않았다.
+
+## M3 - 검증/테스트 루프 정착
+
+[x] exec-plans/009-m3-verification-loop.md가 존재한다.
+[x] M3 상태가 구현 승인 후 진행 상태로 갱신됐다.
+[x] docs/verification/play-mode-checklist.md가 있다.
+[x] Play Mode 체크리스트에 초기 상태, 벽/격자 밖 입력, Clear 경로, Retry, Failed 경로, Console 확인이 포함되어 있다.
+[x] 기존 gameplay 규칙이 DeliveryLoopState.cs로 분리됐다.
+[x] FirstPlayableLoop.cs가 DeliveryLoopState를 사용한다.
+[x] Edit Mode 테스트 파일이 추가됐다.
+[x] Edit Mode 테스트가 초기 상태, invalid move, valid move, pickup/delivery clear, turn limit failed, reset을 검증한다.
+[x] dotnet build codex-harness-dbz-v0.sln이 경고 0개, 오류 0개로 통과했다.
+[x] Unity Edit Mode Test Runner 또는 batchmode로 DeliveryLoopStateTests가 통과했다.
+[x] M3 리팩터 후 Play Mode 체크리스트를 1회 통과했다.
+[x] exec-plans/009-m3-verification-loop.md 상태가 완료됨이다.
+[x] 구현 완료 커밋이 있다.
+[x] git status --short 결과가 비어 있다.
+
+검증 메모:
+
+- 첫 `dotnet build codex-harness-dbz-v0.sln`은 Unity 생성 `Assembly-CSharp.csproj`가 새 `DeliveryLoopState.cs`를 아직 포함하지 않아 실패했다.
+- 로컬 검증을 위해 추적되지 않는 Unity 생성 csproj에 새 런타임 파일과 테스트 파일을 임시 포함한 뒤 `dotnet build codex-harness-dbz-v0.sln`을 다시 실행했고, 경고 0개, 오류 0개로 통과했다.
+- Unity batchmode Edit Mode 테스트는 열린 Unity Editor 인스턴스 때문에 중단됐다.
+- 사용자가 열린 Unity Editor의 Edit Mode Test Runner에서 `DeliveryLoopStateTests` 6개 항목이 모두 통과했다고 확인했다.
+- 사용자가 M3 리팩터 후 `docs/verification/play-mode-checklist.md`의 모든 항목이 통과했다고 확인했다.
+- M3 완료 커밋 후 `git status --short` 결과가 비어 있음을 확인했다.
