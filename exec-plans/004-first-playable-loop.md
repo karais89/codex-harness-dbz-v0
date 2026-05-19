@@ -17,7 +17,7 @@
 
 ## 진행 상황
 
-상태: 구현 승인 대기
+상태: 진행 중
 
 - [x] M1 gameplay loop 인터뷰와 공유된 이해 검증을 완료했다.
 - [x] `docs/design/core-beliefs.md`가 `상태: 승인됨`임을 확인했다.
@@ -26,12 +26,14 @@
 - [x] 이 ExecPlan을 생성했다.
 - [x] Codex 자체 리뷰를 완료했다.
 - [x] 사용자에게 검토용 요약을 제공했다.
-- [ ] 사용자가 구현 시작을 승인했다.
-- [ ] 구현 시작 후 상태를 `진행 중`으로 갱신했다.
-- [ ] M1 gameplay 스크립트를 추가했다.
+- [x] 사용자가 구현 시작을 승인했다.
+- [x] 구현 시작 후 상태를 `진행 중`으로 갱신했다.
+- [x] M1 gameplay 스크립트를 추가했다.
+- [x] 명령 기반 C# 컴파일 검증을 완료했다.
+- [x] Unity batchmode 검증 시도 결과를 기록했다.
 - [ ] Unity Play Mode에서 핵심 루프를 수동 검증했다.
-- [ ] 검증 결과와 예상 밖 발견을 이 ExecPlan에 기록했다.
-- [ ] `docs/current-state.md`를 M1 구현 결과에 맞게 갱신했다.
+- [x] 검증 결과와 예상 밖 발견을 이 ExecPlan에 기록했다.
+- [x] `docs/current-state.md`를 M1 구현 결과에 맞게 갱신했다.
 - [ ] 구현 완료 커밋 후 `git status`가 clean임을 확인했다.
 
 ## 맥락
@@ -136,6 +138,15 @@ M1 완료 전까지 hooks, MCP, custom skills, subagents, 별도 template 폴더
 
 자동 테스트는 M1 필수 범위가 아니다. 다만 구현 중 간단한 Edit Mode 테스트가 작고 안정적으로 가능하다고 판단되면 이 ExecPlan에 변경 이유를 기록한 뒤 추가할 수 있다.
 
+현재 검증 결과:
+
+- `dotnet build codex-harness-dbz-v0.sln`: 통과. 경고 0개, 오류 0개.
+- `dotnet build codex-harness-dbz-v0.sln --no-restore`: `Temp/obj/Assembly-CSharp/project.assets.json` 누락으로 한 차례 실패했다. 일반 `dotnet build`가 복원을 수행한 뒤 경고 0개, 오류 0개로 통과했다.
+- Unity batchmode 명령: 실행 시도했으나 같은 프로젝트를 연 Unity Editor 인스턴스가 이미 있어 중단됐다. 로그 파일은 `Logs/m1-batchmode.log`에 생성됐다.
+- 열린 Unity Editor 확인: `Unity` 프로세스가 `codex-harness-dbz-v0 - SampleScene - Windows, Mac, Linux - Unity 6.4 (6000.4.1f1) <DX11>` 창 제목으로 실행 중임을 확인했다.
+- Unity Editor 로그 확인: 기존 프로젝트 로드와 `SampleScene` 로드는 확인했지만, 새 `FirstPlayableLoop.cs`의 Play Mode 동작은 이 세션에서 직접 검증하지 못했다.
+- 아직 필요한 검증: 열린 Unity Editor에서 Play Mode를 시작해 이동, Pickup, Deliver, 실패, Retry, Console 오류 여부를 수동 확인해야 한다.
+
 ## 자체 리뷰
 
 - 인터뷰 합의와 ExecPlan 내용이 일치한다.
@@ -166,14 +177,14 @@ M1 완료 전까지 hooks, MCP, custom skills, subagents, 별도 template 폴더
 
 ## 예상 밖 발견
 
-- 아직 없음.
+- Unity batchmode 검증은 같은 프로젝트를 연 Unity Editor 인스턴스가 이미 있으면 실행되지 않는다. 이번 세션에서는 `dotnet build`로 C# 컴파일은 확인했지만, Play Mode 수동 검증은 열린 Editor에서 별도로 확인해야 한다.
 
 ## 회고
 
-아직 구현 전이다.
+아직 Play Mode 검증 전이다.
 
-- 완료한 것: M1 gameplay design 기준 승인 확인, 이 ExecPlan 생성.
-- 완료하지 못한 것: gameplay 구현, Unity Play Mode 검증, M1 완료 상태 문서화.
-- 배운 것: 아직 없음.
-- 다음에 해야 할 것: 사용자가 이 ExecPlan을 검토하고 구현 시작 여부를 결정한다.
+- 완료한 것: M1 gameplay design 기준 승인 확인, 이 ExecPlan 생성, M1 gameplay 스크립트 추가, 명령 기반 C# 컴파일 검증.
+- 완료하지 못한 것: Unity Play Mode 핵심 루프 수동 검증, M1 완료 상태 문서화.
+- 배운 것: 현재 프로젝트가 Unity Editor에서 열려 있으면 batchmode 검증은 중단된다.
+- 다음에 해야 할 것: 열린 Unity Editor에서 Play Mode를 실행해 이동, Pickup, Deliver, 실패, Retry를 수동 검증한다.
 - 다음 계획을 시작할 준비가 되었는지 여부: 아니다. 이 ExecPlan의 구현과 검증이 먼저 필요하다.
