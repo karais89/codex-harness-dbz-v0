@@ -159,3 +159,20 @@
 - 사용자가 열린 Unity Editor의 Edit Mode Test Runner에서 `DeliveryLoopStateTests` 6개 항목이 모두 통과했다고 확인했다.
 - 사용자가 M3 리팩터 후 `docs/verification/play-mode-checklist.md`의 모든 항목이 통과했다고 확인했다.
 - M3 완료 커밋 후 `git status --short` 결과가 비어 있음을 확인했다.
+
+## M4 - Handoff Test
+
+[x] 새 Codex 세션 관점에서 저장소 문서를 읽고 현재 프로젝트 상태를 요약했다.
+[x] 현재 완료된 마일스톤이 M0, M1, M2, M3, M4임을 확인했다.
+[x] Unity Play Mode에서 가능한 현재 게임 동작을 문서만으로 설명할 수 있음을 확인했다.
+[x] 승인된 design 기준이 `docs/design/core-beliefs.md`와 `docs/design/gameplay-loop.md`임을 확인했다.
+[x] ExecPlan 없이 진행하면 안 되는 작업 범위를 확인했다.
+[x] 회귀 검증 기준이 `docs/verification/play-mode-checklist.md`와 M3 Edit Mode 테스트 기록에 있음을 확인했다.
+[x] 현재 활성 계획은 `exec-plans/011-harness-reuse-guide.md` 구현 승인 대기이고, 다음 마일스톤은 M5 공개 가능한 포트폴리오 패키징임을 확인했다.
+[x] M4 handoff 판정을 Pass로 기록했다.
+
+검증 메모:
+
+- handoff 요약 요청에서 현재 상태, 완료된 것, 남은 것, 다음 추천 작업, 문서상 모순/누락을 문서만 근거로 재구성했다.
+- 문서상 큰 handoff 차단 모순은 없었다.
+- `docs/complete-log.md`에 M2 전용 섹션이 따로 없는 점은 작은 누락으로 확인했지만, M2 완료 사실은 `docs/current-state.md`와 `exec-plans/008-m2-readability-regression-check.md`에 기록되어 있어 M4 통과를 막지는 않는다.
