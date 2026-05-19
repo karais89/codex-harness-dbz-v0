@@ -29,6 +29,7 @@ M2는 위 두 문서가 이미 승인한 최소 UI 피드백과 Retry 규칙의 
 - [x] 사용자가 구현 시작을 승인했다.
 - [x] 구현 시작 후 상태를 `진행 중`으로 갱신한다.
 - [x] M2 UI 읽기성 개선을 적용한다.
+- [x] 수동 검증 중 발견된 긴 Status 문구 겹침을 수정했다.
 - [x] 명령 기반 C# 컴파일 검증을 완료한다.
 - [ ] Unity Play Mode에서 M1 회귀 검증과 M2 읽기성 검증을 완료한다.
 - [x] 검증 결과와 예상 밖 발견을 이 ExecPlan에 기록한다.
@@ -129,10 +130,12 @@ M1 완료 당시 Unity Play Mode 수동 검증에서 다음 핵심 동작이 통
 현재 검증 결과:
 
 - `dotnet build codex-harness-dbz-v0.sln`: 통과. 경고 0개, 오류 0개.
+- Status 문구 겹침 수정 후 `dotnet build codex-harness-dbz-v0.sln`: 통과. 경고 0개, 오류 0개.
 - Unity batchmode 명령: 실행 시도했으나 같은 프로젝트를 연 Unity Editor 인스턴스가 이미 있어 중단됐다. 출력은 `It looks like another Unity instance is running with this project open.`로 확인했다.
 - 열린 Unity Editor 확인: `Unity` 프로세스가 `codex-harness-dbz-v0 - SampleScene - Windows, Mac, Linux - Unity 6.4 (6000.4.1f1) <DX11>` 창 제목으로 실행 중임을 확인했다.
 - Unity Editor 로그 확인: `Mono: successfully reloaded assembly`를 확인했고, 확인한 로그 tail에서 새 C# 컴파일 오류는 보이지 않았다.
-- Unity Play Mode 수동 검증: 아직 수행하지 않았다. M2 UI 가독성 확인과 M1 회귀 검증은 열린 Unity Editor에서 수동으로 확인해야 한다.
+- Unity Play Mode 수동 검증: 사용자가 목표 문구, `Turns Left`, `Cargo`, `Status`, `Retry Level`, UI 겹침, 이동, 벽/격자 밖 입력, Pickup, Deliver, Retry, Failed 동작을 확인했다. 기능 동작은 통과했지만 Failed 상태의 긴 Status 문구가 보드 위에 출력되는 문제가 발견됐다.
+- 긴 Status 문구 겹침 수정: 상태 문구를 `Deliver to GOAL.`, `Delivered.`, `Out of turns.`로 줄였다. 열린 Unity Editor에서 Status 문구가 더 이상 보드 위에 출력되지 않는지 재확인이 필요하다.
 
 ## 자체 리뷰
 
@@ -160,6 +163,7 @@ M1 완료 당시 Unity Play Mode 수동 검증에서 다음 핵심 동작이 통
 ## 예상 밖 발견
 
 - M2에서도 M1 때와 동일하게 같은 프로젝트를 연 Unity Editor 인스턴스가 있으면 Unity batchmode 검증이 중단된다. 이번에는 `dotnet build`와 열린 Editor 로그로 컴파일 상태를 확인했고, Play Mode 조작 검증은 수동 검증 대기로 남겼다.
+- 수동 검증 중 Failed 상태의 `Status: Out of turns. Retry the level.` 문구가 너무 길어 보드 위에 출력되는 문제가 발견됐다. M2의 읽기성 목표에 맞게 Status 문구를 짧게 줄이고 재검증 대기로 남겼다.
 
 ## 회고
 

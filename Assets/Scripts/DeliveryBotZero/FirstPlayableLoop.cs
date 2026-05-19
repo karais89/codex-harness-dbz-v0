@@ -395,11 +395,11 @@ namespace DeliveryBotZero
             switch (resultState)
             {
                 case ResultState.Clear:
-                    return "Delivered. Level clear.";
+                    return "Delivered.";
                 case ResultState.Failed:
-                    return "Out of turns. Retry the level.";
+                    return "Out of turns.";
                 default:
-                    return hasItem ? "Deliver BOX to GOAL." : "Pick up BOX.";
+                    return hasItem ? "Deliver to GOAL." : "Pick up BOX.";
             }
         }
 
