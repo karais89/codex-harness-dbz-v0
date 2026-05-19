@@ -172,8 +172,8 @@ namespace DeliveryBotZero
             textMesh.text = label;
             textMesh.anchor = TextAnchor.MiddleCenter;
             textMesh.alignment = TextAlignment.Center;
-            textMesh.characterSize = 0.18f;
-            textMesh.fontSize = 40;
+            textMesh.characterSize = 0.08f;
+            textMesh.fontSize = 32;
             textMesh.color = color;
 
             Font font = GetDefaultFont();
