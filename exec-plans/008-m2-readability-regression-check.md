@@ -17,7 +17,7 @@ M2는 위 두 문서가 이미 승인한 최소 UI 피드백과 Retry 규칙의 
 
 ## 진행 상황
 
-상태: Unity Play Mode 수동 검증 대기
+상태: 완료됨
 
 - [x] M1 완료 상태를 확인했다.
 - [x] M2 범위를 논의했다.
@@ -31,10 +31,10 @@ M2는 위 두 문서가 이미 승인한 최소 UI 피드백과 Retry 규칙의 
 - [x] M2 UI 읽기성 개선을 적용한다.
 - [x] 수동 검증 중 발견된 긴 Status 문구 겹침을 수정했다.
 - [x] 명령 기반 C# 컴파일 검증을 완료한다.
-- [ ] Unity Play Mode에서 M1 회귀 검증과 M2 읽기성 검증을 완료한다.
+- [x] Unity Play Mode에서 M1 회귀 검증과 M2 읽기성 검증을 완료한다.
 - [x] 검증 결과와 예상 밖 발견을 이 ExecPlan에 기록한다.
 - [x] `docs/current-state.md`를 M2 구현 결과에 맞게 갱신한다.
-- [ ] 구현 완료 커밋 후 `git status`가 clean임을 확인한다.
+- [x] 구현 완료 커밋 후 `git status`가 clean임을 확인한다.
 
 ## 맥락
 
@@ -135,7 +135,9 @@ M1 완료 당시 Unity Play Mode 수동 검증에서 다음 핵심 동작이 통
 - 열린 Unity Editor 확인: `Unity` 프로세스가 `codex-harness-dbz-v0 - SampleScene - Windows, Mac, Linux - Unity 6.4 (6000.4.1f1) <DX11>` 창 제목으로 실행 중임을 확인했다.
 - Unity Editor 로그 확인: `Mono: successfully reloaded assembly`를 확인했고, 확인한 로그 tail에서 새 C# 컴파일 오류는 보이지 않았다.
 - Unity Play Mode 수동 검증: 사용자가 목표 문구, `Turns Left`, `Cargo`, `Status`, `Retry Level`, UI 겹침, 이동, 벽/격자 밖 입력, Pickup, Deliver, Retry, Failed 동작을 확인했다. 기능 동작은 통과했지만 Failed 상태의 긴 Status 문구가 보드 위에 출력되는 문제가 발견됐다.
-- 긴 Status 문구 겹침 수정: 상태 문구를 `Deliver to GOAL.`, `Delivered.`, `Out of turns.`로 줄였다. 열린 Unity Editor에서 Status 문구가 더 이상 보드 위에 출력되지 않는지 재확인이 필요하다.
+- 긴 Status 문구 겹침 수정: 상태 문구를 `Deliver to GOAL.`, `Delivered.`, `Out of turns.`로 줄였다.
+- 사용자 수동 재검증: `Status: Out of turns.`, `Status: Deliver to GOAL.`, `Status: Delivered.`가 보드 위로 넘어가지 않음을 확인했다.
+- 사용자 수동 최종 검증: Console에 새 Error와 새 Warning이 없음을 확인했다.
 
 ## 자체 리뷰
 
@@ -167,4 +169,10 @@ M1 완료 당시 Unity Play Mode 수동 검증에서 다음 핵심 동작이 통
 
 ## 회고
 
-Unity Play Mode 수동 검증 완료 후 작성한다.
+M2 Readability and Regression Check를 완료했다.
+
+- 완료한 것: M1 루프를 유지한 채 목표 문구, `Turns Left`, `Cargo`, `Status`, `Retry Level` 라벨을 추가하거나 개선했다. 수동 검증 중 발견된 긴 Status 문구 겹침을 수정했고, M1 회귀 동작과 M2 읽기성 검증을 완료했다.
+- 완료하지 못한 것: Unity batchmode 검증은 열린 Unity Editor 인스턴스 때문에 중단됐다. 대신 `dotnet build`, 열린 Editor 로그, 사용자 Play Mode 수동 검증으로 확인했다.
+- 배운 것: UI 문구는 의미가 명확해도 기본 Game View에서 보드 영역을 침범할 수 있다. M2 수준에서는 짧은 상태 문구가 더 안정적이다.
+- 다음에 해야 할 것: M3 검증/테스트 루프 정착 범위를 논의한다.
+- 다음 계획을 시작할 준비가 되었는지 여부: 예. M3를 시작하려면 기존 워크플로우 규칙에 따라 먼저 사용자 의도와 범위를 논의한다.
