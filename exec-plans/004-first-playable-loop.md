@@ -34,7 +34,7 @@
 - [ ] Unity Play Mode에서 핵심 루프를 수동 검증했다.
 - [x] 검증 결과와 예상 밖 발견을 이 ExecPlan에 기록했다.
 - [x] `docs/current-state.md`를 M1 구현 결과에 맞게 갱신했다.
-- [ ] 구현 완료 커밋 후 `git status`가 clean임을 확인했다.
+- [x] 구현 완료 커밋 후 `git status`가 clean임을 확인했다.
 
 ## 맥락
 
